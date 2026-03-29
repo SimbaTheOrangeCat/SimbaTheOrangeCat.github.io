@@ -40,24 +40,17 @@
             color: var(--text-secondary);
         }
 
-        .about-image-placeholder {
+        .about-image {
             width: 300px;
             height: 400px;
-            background: linear-gradient(135deg, var(--border-color), #f0ebe1);
+            object-fit: cover;
             border-radius: 12px;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            transition: var(--transition-smooth);
         }
 
-        .about-image-placeholder::after {
-            content: 'Photo placeholder';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-secondary);
-            font-family: var(--font-serif);
-            font-style: italic;
+        :root.dark-mode .about-image {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
     </style>
 
@@ -85,9 +78,7 @@
     <main class="main-content">
 
         <div class="container about-wrapper fade-up">
-            <div class="about-image-placeholder">
-                <!-- Add real image here later -->
-            </div>
+            <img src="assets/ayan-profile.jpg" alt="Ayan" class="about-image">
             <div class="about-text">
                 <h1 class="about-title">Hi, I'm Ayan.</h1>
                 <p>I write about finding warmth in minimalism, exploring slow living, and doing meaningful work.</p>
