@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art of Mindful Breathing - Ayan's Blog</title>
+    <meta name="description" content="A warm and minimalist personal space on the internet.">
+    <!-- Google Fonts: Lora (serif for coziness) and Inter (sans-serif for clean UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/global.css">
+    
+<style>
+.article-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.article-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.article-content {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.article-content p {
+    margin-bottom: 24px;
+}
+
+.article-content h2, .article-content h3 {
+    margin-top: 48px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.article-footer {
+    max-width: 680px;
+    margin: 80px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress-bar"></div>
+    </div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Mindfactor.</a>
+            <div class="nav-right">
+                <nav class="main-nav">
+                    <a href="index.html">Home</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="about.html">About</a>
+                    <a href="search.html">Search</a>
+                </nav>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+<article class="container fade-up">
+    <header class="article-header">
+        <div class="meta-tags" style="justify-content: center; margin-bottom: 24px;">
+            <span class="category-tag">Mindfulness</span>
+        </div>
+        <h1 class="article-title">Art of Mindful Breathing</h1>
+        <div class="article-meta">
+            <span>Mar 27, 2026</span>
+            <span style="color: var(--border-color);">&bull;</span>
+            <span>3 min read</span>
+        </div>
+    </header>
+
+    <div class="article-content">
+        <p>Ever felt the world around you is too much intimidating? No matter what you do, what you think, it is always scary.</p>
+        <p>The constant feeling of an irritation inside your chest, not able to breathe, or maybe you can, but just not enough to reach till the bottom of your lungs.</p>
+        <p>We call it Anxiety.</p>
+        <p>The objective is to give your pre frontal cortex (PFC) the control of your brain from your limbic system.</p>
+        <p>Lets walk it through together, how a simple mindful breathing can help you realize that you are OK, you are FINE.</p>
+        <p>Let's take a long breath in, hold it, then release it. It is not simple, it takes time, patience and practice.</p>
+        <p>Focus on your body, feel where it hurts, or where it is uncomfortable. If possible keep your palm on your chest and feel yourself taking a deep breath. Now, I want you to focus on the breath that you take. Inhale for exactly 6 seconds, hold it for exactly 4 seconds and exhale for exactly 6 seconds. Repeat it, but this time keep counting on your head from 1 to 6, then 1 to 4, then 1 to 6 again. Don't listen to your heartbeat, we make this mistake often trying to sync our heartbeat with seconds, it will only make you more uncomfortable. If possible, try tapping your fingers, or your legs or anywhere on your body which feels comfortable, to keep a count of seconds.</p>
+        <p>Repeat the whole process again for at least 10 times. It will be hard, but practicing it at your comfort zone every day will help you do it during stressful situations.</p>
+        <p>There is also an advanced version of it - You will do what you are doing just modify it a little bit. You have to visualize the breath going in, from your nose, then to lungs, then to the bottom of the lungs.</p>
+        <p>I hope you feel better :)</p>
+    </div>
+
+    <footer class="article-footer">
+        <p>Thanks for reading! If you enjoyed this, feel free to share it.</p>
+        <div style="margin-top: 24px; display: flex; justify-content: center; gap: 16px;">
+            <button onclick="sharePost()" class="btn" style="cursor: pointer; border: none; font-family: inherit; font-size: 1rem;">Share Post</button>
+            <a href="blog.html" class="btn">&larr; Back to Blog</a>
+        </div>
+    </footer>
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 Mindfactor. Designed with warmth.</p>
+        </div>
+    </footer>
+
+    <script src="assets/scripts/main.js"></script>
+    <script>
+        function sharePost() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert("Link copied to clipboard!");
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

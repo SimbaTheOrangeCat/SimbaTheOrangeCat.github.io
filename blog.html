@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Mindfactor's Personal Blog</title>
+    <meta name="description" content="A warm and minimalist personal space on the internet.">
+    <!-- Google Fonts: Lora (serif for coziness) and Inter (sans-serif for clean UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/global.css">
+
+    <style>
+        .blog-header {
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        .blog-title {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .blog-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Categories Filter */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--text-primary);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        :root.dark-mode .category-btn:hover,
+        :root.dark-mode .category-btn.active {
+            color: var(--bg-color); /* Dark contrast color */
+        }
+
+        /* Post List */
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .list-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item .post-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress-bar"></div>
+    </div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Mindfactor.</a>
+            <div class="nav-right">
+                <nav class="main-nav">
+                    <a href="index.html">Home</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="about.html">About</a>
+                    <a href="search.html">Search</a>
+                </nav>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="blog-title">Journal</h1>
+                <p class="blog-subtitle">Writing on design, life, and finding focus.</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="categories">
+                <button class="category-btn active" onclick="filterCategory('All')">All</button>
+
+                <button class="category-btn" onclick="filterCategory('Lifestyle')">Lifestyle</button>
+                <button class="category-btn" onclick="filterCategory('Productivity')">Productivity</button>
+                <button class="category-btn" onclick="filterCategory('Mindfulness')">Mindfulness</button>
+
+            </div>
+
+            <!-- Blog Posts -->
+            <div class="post-list">
+
+                <article class="list-item fade-up" data-category="Lifestyle">
+                    <div class="meta-tags">
+                        <span class="category-tag">Lifestyle</span>
+                        <span class="read-time">4 min read</span>
+                        <span style="color: var(--border-color); margin-left: 16px;">&bull;</span>
+                        <span style="margin-left: 16px;">Oct 12, 2026</span>
+                    </div>
+                    <a href="warmth-in-minimalism.html">
+                        <h2 class="post-title">Finding Warmth in the Minimalist Lifestyle</h2>
+                    </a>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 1.1rem;">Minimalism does not
+                        mean cold, empty spaces. It is about creating room for what truly matters, wrapped in warmth.
+                    </p>
+                    <a href="warmth-in-minimalism.html" style="color: var(--accent-color); font-weight: 500;">Read post
+                        &rarr;</a>
+                </article>
+
+                <article class="list-item fade-up" data-category="Productivity">
+                    <div class="meta-tags">
+                        <span class="category-tag">Productivity</span>
+                        <span class="read-time">6 min read</span>
+                        <span style="color: var(--border-color); margin-left: 16px;">&bull;</span>
+                        <span style="margin-left: 16px;">Nov 01, 2026</span>
+                    </div>
+                    <a href="cozy-productivity.html">
+                        <h2 class="post-title">A Guide to Cozy Productivity</h2>
+                    </a>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 1.1rem;">How to embrace soft
+                        focus and ambient environments to boost your creative output without burnout.</p>
+                    <a href="cozy-productivity.html" style="color: var(--accent-color); font-weight: 500;">Read post
+                        &rarr;</a>
+                </article>
+
+                <article class="list-item fade-up" data-category="Mindfulness">
+            <div class="meta-tags">
+                <span class="category-tag">Mindfulness</span>
+                <span class="read-time">3 min read</span>
+                <span style="color: var(--border-color); margin-left: 16px;">&bull;</span>
+                <span style="margin-left: 16px;">Mar 27, 2026</span>
+            </div>
+            <a href="art-of-mindful-breathing.html">
+                <h2 class="post-title">Art of Mindful Breathing</h2>
+            </a>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 1.1rem;">Ever felt the world around you is too much intimidating? No matter what you do, what you think, it is always scary.</p>
+            <a href="art-of-mindful-breathing.html" style="color: var(--accent-color); font-weight: 500;">Read post &rarr;</a>
+        </article>
+        
+        <article class="list-item fade-up" data-category="Mindfulness">
+                    <div class="meta-tags">
+                        <span class="category-tag">Mindfulness</span>
+                        <span class="read-time">5 min read</span>
+                        <span style="color: var(--border-color); margin-left: 16px;">&bull;</span>
+                        <span style="margin-left: 16px;">Nov 15, 2026</span>
+                    </div>
+                    <a href="art-of-slow-living.html">
+                        <h2 class="post-title">The Art of Slow Living</h2>
+                    </a>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 1.1rem;">Slowing down in a
+                        fast-paced world brings clarity and tranquility to our daily routines.</p>
+                    <a href="art-of-slow-living.html" style="color: var(--accent-color); font-weight: 500;">Read post
+                        &rarr;</a>
+                </article>
+
+            </div>
+        </div>
+
+        <script>
+            function filterCategory(category) {
+                // Update active button state
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.innerText === category) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                // Filter posts
+                document.querySelectorAll('.list-item').forEach(item => {
+                    if (category === 'All' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.style.opacity = '1', 50);
+                    } else {
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            }
+        </script>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 Mindfactor. Designed with warmth.</p>
+        </div>
+    </footer>
+
+    <script src="assets/scripts/main.js"></script>
+
+</body>
+
+</html>
