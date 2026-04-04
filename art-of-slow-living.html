@@ -61,6 +61,106 @@
             border-top: 1px solid var(--border-color);
             text-align: center;
         }
+
+        /* ── Comment Section ───────────────────────────────── */
+        .comments-section {
+            max-width: 680px;
+            margin: 64px auto 0;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .comments-heading {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comments-count-badge {
+            background: var(--accent-color, #c0a06a);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 999px;
+        }
+        .comments-subheading {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+        .comment-form {
+            background: var(--card-bg, rgba(255,255,255,0.04));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 48px;
+            transition: box-shadow 0.3s;
+        }
+        .comment-form:focus-within { box-shadow: 0 4px 32px rgba(192,160,106,0.10); }
+        .comment-form-row { display: flex; gap: 14px; margin-bottom: 14px; }
+        .comment-input-wrap { display: flex; flex-direction: column; flex: 1; gap: 6px; }
+        .comment-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.05em; text-transform: uppercase; }
+        .comment-input, .comment-textarea {
+            width: 100%; padding: 12px 16px; border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            background: var(--bg-primary, #fff); color: var(--text-primary);
+            font-family: 'Inter', sans-serif; font-size: 0.97rem;
+            outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+            resize: none; box-sizing: border-box;
+        }
+        .comment-input:focus, .comment-textarea:focus {
+            border-color: var(--accent-color, #c0a06a);
+            box-shadow: 0 0 0 3px rgba(192,160,106,0.13);
+        }
+        .comment-textarea { min-height: 110px; line-height: 1.6; }
+        .comment-form-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; flex-wrap: wrap; gap: 10px; }
+        .comment-char-count { font-size: 0.8rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+        .comment-form-actions { display: flex; align-items: center; gap: 12px; }
+        .comment-success-msg { display: none; font-size: 0.9rem; color: #7aad7a; font-weight: 500; }
+        .comment-submit-btn {
+            background: var(--accent-color, #c0a06a); color: #fff; border: none;
+            border-radius: 10px; padding: 11px 24px; font-family: 'Inter', sans-serif;
+            font-size: 0.97rem; font-weight: 600; cursor: pointer;
+            transition: background 0.22s, transform 0.15s, opacity 0.2s;
+        }
+        .comment-submit-btn:hover { background: var(--accent-hover, #a8885a); transform: translateY(-1px); }
+        .comment-submit-btn.comment-btn--success { background: #7aad7a; }
+        .comment-submit-btn:disabled { opacity: 0.75; cursor: not-allowed; transform: none; }
+        .comments-empty {
+            text-align: center; padding: 32px; color: var(--text-secondary);
+            font-size: 0.97rem; border: 1.5px dashed var(--border-color);
+            border-radius: 14px; margin-bottom: 8px;
+        }
+        .comments-empty span { display: block; font-size: 2rem; margin-bottom: 8px; }
+        .comments-list { display: flex; flex-direction: column; gap: 20px; }
+        .comment-card { display: flex; gap: 16px; animation: commentFadeIn 0.4s ease both; }
+        @keyframes commentFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .comment-avatar {
+            width: 42px; height: 42px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            font-weight: 700; flex-shrink: 0;
+        }
+        .comment-body {
+            flex: 1; background: var(--card-bg, rgba(255,255,255,0.04));
+            border: 1px solid var(--border-color); border-radius: 14px;
+            padding: 16px 20px; transition: border-color 0.25s;
+        }
+        .comment-body:hover { border-color: var(--accent-color, #c0a06a); }
+        .comment-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+        .comment-author { font-weight: 600; font-size: 0.97rem; color: var(--text-primary); }
+        .comment-date { font-size: 0.8rem; color: var(--text-secondary); }
+        .comment-text { font-size: 0.97rem; line-height: 1.7; color: var(--text-primary); margin: 0; }
+        @media (max-width: 600px) {
+            .comment-form-row { flex-direction: column; }
+            .comment-card { gap: 12px; }
+            .comment-avatar { width: 36px; height: 36px; font-size: 0.78rem; }
+        }
     </style>
 
 </head>
@@ -110,6 +210,39 @@
                     <a href="blog.html" class="btn">&larr; Back to Blog</a>
                 </div>
             </footer>
+
+            <!-- ── Comment Section ── -->
+            <section class="comments-section" id="comments" aria-label="Comments">
+                <h2 class="comments-heading">
+                    💬 Comments
+                    <span class="comments-count-badge" id="comments-count">0</span>
+                </h2>
+                <p class="comments-subheading">Thoughts? Reflections? Leave a note below — no account needed.</p>
+                <form class="comment-form" id="comment-form" novalidate>
+                    <div class="comment-form-row">
+                        <div class="comment-input-wrap">
+                            <label class="comment-label" for="comment-name">Your Name</label>
+                            <input class="comment-input" id="comment-name" type="text" placeholder="e.g. Alex" maxlength="60" required autocomplete="nickname">
+                        </div>
+                    </div>
+                    <div class="comment-input-wrap">
+                        <label class="comment-label" for="comment-text">Your Comment</label>
+                        <textarea class="comment-textarea" id="comment-text" placeholder="Share what this post made you feel or think..." maxlength="1000" required></textarea>
+                    </div>
+                    <div class="comment-form-footer">
+                        <span class="comment-char-count" id="char-count">0 / 1000</span>
+                        <div class="comment-form-actions">
+                            <span class="comment-success-msg" id="comment-success">✓ Comment posted!</span>
+                            <button class="comment-submit-btn" id="comment-submit" type="submit">Post Comment</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="comments-empty" id="comments-empty">
+                    <span>🌿</span>
+                    Be the first to leave a comment!
+                </div>
+                <div class="comments-list" id="comments-list" aria-live="polite"></div>
+            </section>
         </article>
 
     </main>
@@ -121,6 +254,7 @@
     </footer>
 
     <script src="assets/scripts/main.js"></script>
+    <script src="assets/scripts/comments.js"></script>
     <script>
         function sharePost() {
             if (navigator.share) {
