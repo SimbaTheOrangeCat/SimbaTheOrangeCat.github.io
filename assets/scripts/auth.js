@@ -372,6 +372,7 @@
                 // Refresh comments if on a post page
                 if (typeof window.MFCommentsRefresh  === 'function') window.MFCommentsRefresh();
                 if (typeof window.MFReactionsRefresh === 'function') window.MFReactionsRefresh();
+                if (typeof window.MFFeaturesRefresh  === 'function') window.MFFeaturesRefresh();
             });
         }
     }
@@ -425,6 +426,7 @@
         renderHeaderAuth();
         if (typeof window.MFCommentsRefresh  === 'function') window.MFCommentsRefresh();
         if (typeof window.MFReactionsRefresh === 'function') window.MFReactionsRefresh();
+        if (typeof window.MFFeaturesRefresh  === 'function') window.MFFeaturesRefresh();
     }
 
     // ── Signup logic ──────────────────────────────────────────────────────
@@ -452,6 +454,7 @@
         renderHeaderAuth();
         if (typeof window.MFCommentsRefresh  === 'function') window.MFCommentsRefresh();
         if (typeof window.MFReactionsRefresh === 'function') window.MFReactionsRefresh();
+        if (typeof window.MFFeaturesRefresh  === 'function') window.MFFeaturesRefresh();
     }
 
     // ── Init ──────────────────────────────────────────────────────────────
