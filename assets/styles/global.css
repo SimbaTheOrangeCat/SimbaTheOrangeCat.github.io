@@ -155,6 +155,30 @@ h1, h2, h3, h4, .logo {
     width: 100%;
 }
 
+/* My Journal nav button */
+.main-nav a.nav-journal-btn {
+    background-color: var(--accent-color);
+    color: #fff !important;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 2px 8px rgba(205, 149, 117, 0.25);
+}
+
+.main-nav a.nav-journal-btn::after {
+    display: none;
+}
+
+.main-nav a.nav-journal-btn:hover {
+    background-color: var(--accent-hover);
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(205, 149, 117, 0.4);
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     background: none;
