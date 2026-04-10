@@ -388,19 +388,6 @@
         // onAuthStateChange fires and clears _profile
     }
 
-    // ── Auth state listener ────────────────────────────────────────────────
-    sb.auth.onAuthStateChange(async (event, session) => {
-        if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
-            _profile = session?.user ? await fetchProfile(session.user) : null;
-        } else if (event === 'SIGNED_OUT') {
-            _profile = null;
-        } else {
-            return; // ignore other events
-        }
-        renderHeaderAuth();
-        notifyModules();
-    });
-
     // ── Init ───────────────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', async () => {
         injectStyles();
@@ -425,11 +412,26 @@
         // Seed admin accounts (runs once, checks DB first)
         seedAdmins().catch(() => {});
 
-        // Get existing session
-        const { data: { session } } = await sb.auth.getSession();
-        _profile = session?.user ? await fetchProfile(session.user) : null;
-        renderHeaderAuth();
-        notifyModules();
+        // ── Auth state listener ──────────────────────────────────────────
+        // Registered inside DOMContentLoaded so the DOM is guaranteed ready
+        // when any event fires. INITIAL_SESSION handles the first render,
+        // removing the need for a separate getSession() + manual render call
+        // (which was the cause of duplicate dropdown items).
+        sb.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
+                _profile = session?.user ? await fetchProfile(session.user) : null;
+            } else if (event === 'SIGNED_OUT') {
+                _profile = null;
+            } else {
+                return; // ignore other events
+            }
+            renderHeaderAuth();
+            // TOKEN_REFRESHED fires when returning to a tab — don't re-render modules
+            // as it would wipe in-progress form content (e.g. the journal textarea)
+            if (event !== 'TOKEN_REFRESHED') {
+                notifyModules();
+            }
+        });
     });
 
 })();

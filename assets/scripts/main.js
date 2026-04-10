@@ -1,5 +1,8 @@
 // main.js
 
+// Disable browser scroll restoration so it doesn't conflict with page animations
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 document.addEventListener('DOMContentLoaded', () => {
     // === 1. Dark Mode Toggle ===
     const themeToggle = document.getElementById('theme-toggle');

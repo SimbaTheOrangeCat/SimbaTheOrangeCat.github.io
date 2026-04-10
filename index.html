@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mindfactor's Personal Blog</title>
     <meta name="description" content="A warm and minimalist personal space on the internet.">
@@ -72,9 +73,9 @@
         }
 
         .post-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(44, 42, 38, 0.05);
-            border-color: rgba(205, 149, 117, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--accent-color);
+            border-color: var(--accent-color);
         }
 
         .post-title {
@@ -98,7 +99,7 @@
     </div>
     <header class="site-header">
         <div class="container header-inner">
-            <a href="index.html" class="logo">Mindfactor.</a>
+            <a href="index.html" class="logo"><img src="favicon.svg" class="logo-icon" alt="" width="28" height="28" aria-hidden="true">Mindfactor.</a>
             <div class="nav-right">
                 <nav class="main-nav">
                     <a href="index.html">Home</a>

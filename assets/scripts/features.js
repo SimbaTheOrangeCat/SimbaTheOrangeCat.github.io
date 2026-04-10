@@ -218,9 +218,17 @@
         const btnRow = document.querySelector('.article-footer > div');
         if (!btnRow) return;
 
-        const active = await isBookmarked(session.id);
-        const btn    = document.createElement('button');
+        // Claim the slot synchronously before any await so concurrent calls see
+        // the element and bail out early (prevents race-condition duplicates).
+        const btn = document.createElement('button');
         btn.id        = 'mf-bm-btn';
+        btn.className = 'mf-bm-btn';
+        btn.disabled  = true;
+        btn.innerHTML = '🔖 Bookmark';
+        btnRow.appendChild(btn);
+
+        const active  = await isBookmarked(session.id);
+        btn.disabled  = false;
         btn.className = 'mf-bm-btn' + (active ? ' active' : '');
         btn.innerHTML = active ? '📌 Bookmarked' : '🔖 Bookmark';
 
@@ -232,7 +240,6 @@
             btn.innerHTML = added ? '📌 Bookmarked' : '🔖 Bookmark';
             await refreshDropdown(session);
         });
-        btnRow.appendChild(btn);
     }
 
     // ── Reflection ─────────────────────────────────────────────────────────
@@ -241,8 +248,9 @@
         const comments = document.getElementById('comments');
         if (!comments) return;
 
-        const saved = await getReflection(session.id);
-        const div   = document.createElement('div');
+        // Claim the slot synchronously before any await (same race-condition fix
+        // as injectBookmarkBtn — two concurrent calls must not both pass the guard).
+        const div = document.createElement('div');
         div.id        = 'mf-reflect';
         div.className = 'mf-reflect';
         div.innerHTML = `
@@ -251,12 +259,17 @@
                 <span class="mf-reflect-lock">🔒 Only visible to you</span>
             </div>
             <textarea class="mf-reflect-ta" id="mf-reflect-ta" maxlength="2000"
-                placeholder="What did this post mean to you? Write a note for yourself...">${saved}</textarea>
+                placeholder="What did this post mean to you? Write a note for yourself..."></textarea>
             <p class="mf-reflect-saved" id="mf-reflect-saved">✓ Saved</p>`;
         comments.parentNode.insertBefore(div, comments);
 
+        // Load saved content after the element is in the DOM
+        const saved = await getReflection(session.id);
+        const ta = document.getElementById('mf-reflect-ta');
+        if (ta) ta.value = saved;
+
         let timer;
-        document.getElementById('mf-reflect-ta').addEventListener('input', e => {
+        ta?.addEventListener('input', e => {
             clearTimeout(timer);
             timer = setTimeout(async () => {
                 await saveReflection(session.id, e.target.value);
@@ -404,16 +417,31 @@
     }
 
     // ── Global refresh hook ────────────────────────────────────────────────
+    // _initDone: one-time per-session work (streak, read tracking, banner, accent)
+    // is run inside refresh() on the first call after login, so it is always
+    // coordinated by the same debounce that protects refresh().
+    let _initDone = false;
+
     async function refresh() {
         const session = getSession();
         if (!session) {
             document.getElementById('mf-bm-btn')?.remove();
             document.getElementById('mf-reflect')?.remove();
             localStorage.removeItem('mf_cached_accent');
-            applyAccent('#CD9575'); // reset to default
+            applyAccent('#059669'); // reset to new theme default
+            _initDone = false;
             return;
         }
-        await loadAndApplyAccent(session.id);
+
+        // One-time per-login setup
+        if (!_initDone) {
+            _initDone = true;
+            await updateStreak(session.id);
+            await trackRead(session.id);
+            await loadAndApplyAccent(session.id);
+            await showStreakBanner(session.id);
+        }
+
         await refreshDropdown(session);
         if (isPost()) {
             await injectBookmarkBtn(session);
@@ -421,22 +449,20 @@
         }
     }
 
-    window.MFFeaturesRefresh = refresh;
+    // Debounce: collapse rapid back-to-back calls (e.g. INITIAL_SESSION + SIGNED_IN
+    // firing within milliseconds) into a single refresh() execution.
+    let _mfRefreshTimer = null;
+    window.MFFeaturesRefresh = function () {
+        clearTimeout(_mfRefreshTimer);
+        _mfRefreshTimer = setTimeout(refresh, 50);
+    };
 
     // ── Init ───────────────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', async () => {
+    document.addEventListener('DOMContentLoaded', () => {
         injectStyles();
         addNotifDot();
-
-        const session = getSession();
-        if (session) {
-            await updateStreak(session.id);
-            await trackRead(session.id);
-            await loadAndApplyAccent(session.id);
-            await showStreakBanner(session.id);
-            await refresh();
-        }
-
+        // auth.js will call MFFeaturesRefresh via notifyModules once the session
+        // is resolved — no need to call refresh() here directly.
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') { closeProfile(); closeBookmarks(); }
         });

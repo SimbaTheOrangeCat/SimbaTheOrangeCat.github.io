@@ -277,8 +277,35 @@
         document.head.appendChild(style);
     }
 
+    // ── Soft refresh: re-renders only the entries list, leaves the form intact ──
+    async function softRefresh() {
+        const root    = document.getElementById('journal-root');
+        if (!root) return;
+
+        const session  = window.MFAuth?.getSession();
+        const formExists = !!document.getElementById('journal-event');
+
+        // If auth state changed (logged in/out) and form state doesn't match, do full render
+        if (!session || !formExists) { return render(); }
+
+        // User is still logged in and form exists — only refresh the entries list
+        const { data: entries } = await sb
+            .from('journal_entries')
+            .select('id, event_name, content, image_urls, created_at')
+            .eq('user_id', session.id)
+            .order('created_at', { ascending: false });
+
+        const list       = document.getElementById('journal-entries-list');
+        const pastTitle  = document.querySelector('.journal-past-title');
+        if (list)      list.innerHTML = (entries || []).map(e => renderEntry(e)).join('');
+        if (pastTitle) pastTitle.textContent = entries?.length ? 'Past Entries' : 'No entries yet';
+        bindDeleteButtons(session);
+    }
+
     // ── Init ───────────────────────────────────────────────────────────────
-    window.MFJournalRefresh = render;
+    // Auth state changes (tab switch token refresh etc.) use soft refresh
+    // so in-progress form content is never wiped.
+    window.MFJournalRefresh = softRefresh;
 
     document.addEventListener('DOMContentLoaded', () => {
         if (!document.getElementById('journal-root')) return;
