@@ -14,17 +14,6 @@
   --header-bg: #FFFFFF;
 }
 
-/* ─── Brand Tokens — Dark ──────────────────────────────────────────── */
-.dark {
-  --bg-color: #09090B;
-  --surface-color: #18181B;
-  --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --accent-color: #10B981;
-  --accent-hover: #34D399;
-  --border-color: #27272A;
-  --header-bg: #111113;
-}
 
 /* ─── Base ─────────────────────────────────────────────────────────── */
 @layer base {
@@ -247,10 +236,6 @@
   transition: background-color 0.2s ease;
 }
 
-.dark .category-chip {
-  background-color: rgba(16, 185, 129, 0.1);
-}
-
 /* ─── Post Card ────────────────────────────────────────────────────── */
 .post-card {
   display: flex;
@@ -280,10 +265,6 @@
   border-color: var(--accent-color);
   transform: translateY(-3px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-}
-
-.dark .post-card:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
 .post-card:hover::before {

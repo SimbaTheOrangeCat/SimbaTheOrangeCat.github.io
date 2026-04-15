@@ -5,8 +5,7 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class',
-  theme: {
+theme: {
     extend: {
       // Brand colors mapped to CSS variables so dark mode + accent customisation work
       colors: {

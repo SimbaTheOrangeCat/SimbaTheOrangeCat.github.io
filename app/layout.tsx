@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Lora } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/ThemeProvider'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -36,14 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${lora.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <div id="reading-progress-bar" />
-          <Header />
-          <main className="flex-1 py-14 page-fade-in">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <div id="reading-progress-bar" />
+        <Header />
+        <main className="flex-1 py-14 page-fade-in">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

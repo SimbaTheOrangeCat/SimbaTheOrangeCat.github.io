@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
@@ -14,13 +13,9 @@ const navLinks = [
 ]
 
 export default function Header() {
-  const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -36,7 +31,7 @@ export default function Header() {
       className={[
         'sticky top-0 z-50 bg-[var(--header-bg)] border-b border-[var(--border-color)]',
         'transition-[background-color,border-color,box-shadow] duration-300',
-        scrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.07)] dark:shadow-[0_1px_12px_rgba(0,0,0,0.4)]' : '',
+        scrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.07)]' : '',
       ].join(' ')}
     >
       <div className="container-content flex items-center justify-between h-[68px]">
@@ -80,38 +75,19 @@ export default function Header() {
               My Journal
             </Link>
           </nav>
-
-          {/* Theme toggle */}
-          <button
-            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="ml-1.5 w-8 h-8 flex items-center justify-center rounded-md border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-colors duration-200 text-sm leading-none"
-            aria-label="Toggle dark mode"
-          >
-            {mounted ? (resolvedTheme === 'dark' ? '☀️' : '🌙') : '🌙'}
-          </button>
         </div>
 
-        {/* Mobile right: theme + hamburger */}
-        <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="w-8 h-8 flex items-center justify-center rounded-md border border-[var(--border-color)] text-[var(--text-secondary)] text-sm"
-            aria-label="Toggle dark mode"
-          >
-            {mounted ? (resolvedTheme === 'dark' ? '☀️' : '🌙') : '🌙'}
-          </button>
-
-          <button
-            onClick={() => setMenuOpen(prev => !prev)}
-            className="w-8 h-8 flex flex-col items-center justify-center gap-[5px] rounded-md border border-[var(--border-color)] text-[var(--text-secondary)]"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            <span className={`block w-4 h-0.5 bg-current transition-transform duration-200 origin-center ${menuOpen ? 'translate-y-[6.5px] rotate-45' : ''}`} />
-            <span className={`block w-4 h-0.5 bg-current transition-opacity duration-200 ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`block w-4 h-0.5 bg-current transition-transform duration-200 origin-center ${menuOpen ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
-          </button>
-        </div>
+        {/* Mobile hamburger */}
+        <button
+          className="flex md:hidden w-8 h-8 flex-col items-center justify-center gap-[5px] rounded-md border border-[var(--border-color)] text-[var(--text-secondary)]"
+          onClick={() => setMenuOpen(prev => !prev)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          <span className={`block w-4 h-0.5 bg-current transition-transform duration-200 origin-center ${menuOpen ? 'translate-y-[6.5px] rotate-45' : ''}`} />
+          <span className={`block w-4 h-0.5 bg-current transition-opacity duration-200 ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-4 h-0.5 bg-current transition-transform duration-200 origin-center ${menuOpen ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
+        </button>
       </div>
 
       {/* Mobile menu drawer */}
