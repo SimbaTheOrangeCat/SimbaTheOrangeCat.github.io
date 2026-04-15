@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# next.js build output
+/.next/
+/out/
+
+# env files — never commit secrets
+.env.local
+.env*.local
+
+# debug
+npm-debug.log*
+
+# misc
+.DS_Store
+*.pem

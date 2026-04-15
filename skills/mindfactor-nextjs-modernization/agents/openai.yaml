@@ -1,0 +1,7 @@
+display_name: Mindfactor Next.js Modernization
+short_description: Migrate the Mindfactor site to Next.js while preserving its warm editorial identity.
+default_prompt: >-
+  Use this skill to modernize Mindfactor from a static HTML/CSS/JavaScript site
+  into a Next.js App Router website with MDX content, improved design system,
+  clean routing, Supabase-backed features, and an identity-preserving visual
+  refresh.
