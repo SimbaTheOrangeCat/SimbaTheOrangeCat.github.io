@@ -3,7 +3,13 @@
     "allow": [
       "mcp__Claude_Preview__preview_start",
       "WebFetch(domain:app.datacamp.com)",
-      "WebFetch(domain:www.datacamp.com)"
+      "WebFetch(domain:www.datacamp.com)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --eslint --yes)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(where vercel:*)",
+      "Bash(npx vercel:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
