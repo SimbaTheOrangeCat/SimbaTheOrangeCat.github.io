@@ -26,7 +26,18 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    /* Dreamy sky gradient — fixed so it never scrolls */
+    background-image: linear-gradient(
+        175deg,
+        #c8dff5 0%,
+        #d5c4ee 22%,
+        #eabcd8 46%,
+        #f5cead 72%,
+        #fae8d8 100%
+    );
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #fae8d8; /* fallback */
     color: var(--text-primary);
     font-family: var(--font-sans);
     line-height: 1.6;
@@ -34,7 +45,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -64,16 +74,19 @@ h1, h2, h3, h4, .logo {
    Header
 ─────────────────────────────────────────── */
 .site-header {
-    background-color: var(--header-bg);
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(228, 228, 231, 0.6);
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .site-header.scrolled {
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 24px rgba(120, 90, 140, 0.1);
+    background-color: rgba(255, 255, 255, 0.85);
 }
 
 
@@ -236,8 +249,10 @@ h1, h2, h3, h4, .logo {
    Cards
 ─────────────────────────────────────────── */
 .post-card {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
+    background-color: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(228, 228, 231, 0.7);
     border-radius: 10px;
     padding: 28px 32px;
     transition: var(--transition-smooth);
@@ -248,8 +263,9 @@ h1, h2, h3, h4, .logo {
 
 .post-card:hover {
     border-color: var(--accent-color);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--accent-color);
+    box-shadow: 0 8px 40px rgba(140, 90, 160, 0.12), 0 0 0 1px var(--accent-color);
     transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.92);
 }
 
 
@@ -370,4 +386,50 @@ h1, h2, h3, h4, .logo {
 
 .post-content p {
     margin-bottom: 24px;
+}
+
+/* ───────────────────────────────────────────
+   Dreamy Sky — Canvas & Cloud Animations
+─────────────────────────────────────────── */
+#sky-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.sky-cloud {
+    position: absolute;
+    left: -30%;
+    border-radius: 50%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 248, 252, 0.75) 35%,
+        transparent 72%
+    );
+    filter: blur(10px);
+    animation: cloudDrift linear infinite;
+    opacity: 0;
+}
+
+@keyframes cloudDrift {
+    0%   { transform: translateX(-5vw) translateY(0px);   opacity: 0; }
+    8%   { opacity: var(--cloud-max-opacity, 0.55); }
+    50%  { transform: translateX(55vw) translateY(var(--cloud-sway, -18px)); }
+    92%  { opacity: var(--cloud-max-opacity, 0.55); }
+    100% { transform: translateX(125vw) translateY(0px);  opacity: 0; }
+}
+
+.sky-sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: sparklePulse ease-in-out infinite alternate;
+}
+
+@keyframes sparklePulse {
+    from { opacity: 0.08; transform: scale(0.7); }
+    to   { opacity: 0.55; transform: scale(1.4); }
 }
