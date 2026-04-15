@@ -4,49 +4,7 @@
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === 1. Dark Mode Toggle ===
-    const themeToggle = document.getElementById('theme-toggle');
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-    // Define icons for the button
-    const moonIcon = '🌙';
-    const sunIcon = '☀️';
-
-    // Get current theme from local storage or fallback to system preference
-    const currentTheme = localStorage.getItem("theme");
-    
-    // On load, apply the right theme
-    if (currentTheme == "dark") {
-        document.documentElement.classList.add("dark-mode");
-        if (themeToggle) themeToggle.textContent = sunIcon;
-    } else if (currentTheme == "light") {
-        document.documentElement.classList.remove("dark-mode");
-        if (themeToggle) themeToggle.textContent = moonIcon;
-    } else if (prefersDarkScheme.matches) {
-        document.documentElement.classList.add("dark-mode");
-        if (themeToggle) themeToggle.textContent = sunIcon;
-    } else {
-        if (themeToggle) themeToggle.textContent = moonIcon;
-    }
-
-    // Toggle button event listener
-    if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-            document.documentElement.classList.toggle("dark-mode");
-            let theme = "light";
-            
-            if (document.documentElement.classList.contains("dark-mode")) {
-                theme = "dark";
-                themeToggle.textContent = sunIcon;
-            } else {
-                themeToggle.textContent = moonIcon;
-            }
-            // Save the choice in local storage
-            localStorage.setItem("theme", theme);
-        });
-    }
-
-    // === 2. Smooth Fade-in Scrolling Animations ===
+    // === 1. Smooth Fade-in Scrolling Animations ===
     const observerOptions = {
         root: null,
         rootMargin: '0px',

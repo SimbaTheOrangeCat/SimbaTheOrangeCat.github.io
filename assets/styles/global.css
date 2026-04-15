@@ -18,17 +18,6 @@
     --transition-smooth: all 0.2s ease;
 }
 
-/* Dark Mode */
-:root.dark-mode {
-    --bg-color: #09090B;
-    --surface-color: #18181B;
-    --text-primary: #FAFAFA;
-    --text-secondary: #A1A1AA;
-    --accent-color: #10B981;
-    --accent-hover: #34D399;
-    --border-color: #27272A;
-    --header-bg: #111113;
-}
 
 * {
     box-sizing: border-box;
@@ -87,9 +76,6 @@ h1, h2, h3, h4, .logo {
     box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
 }
 
-:root.dark-mode .site-header.scrolled {
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
-}
 
 .header-inner {
     display: flex;
@@ -152,9 +138,6 @@ h1, h2, h3, h4, .logo {
     background-color: var(--border-color);
 }
 
-:root.dark-mode .main-nav a:hover {
-    background-color: #27272A;
-}
 
 /* My Journal nav button */
 .main-nav a.nav-journal-btn {
@@ -178,27 +161,6 @@ h1, h2, h3, h4, .logo {
     transform: none;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-    background: none;
-    border: 1px solid var(--border-color);
-    font-size: 1rem;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: var(--transition-smooth);
-    padding: 6px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    margin-left: 4px;
-}
-
-.theme-toggle:hover {
-    color: var(--text-primary);
-    border-color: var(--text-secondary);
-    background-color: transparent;
-}
 
 /* ───────────────────────────────────────────
    Reading Progress Bar
@@ -290,9 +252,6 @@ h1, h2, h3, h4, .logo {
     transform: translateY(-3px);
 }
 
-:root.dark-mode .post-card:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--accent-color);
-}
 
 .post-title {
     font-size: 1.4rem;
@@ -332,9 +291,6 @@ h1, h2, h3, h4, .logo {
     border-radius: 4px;
 }
 
-:root.dark-mode .category-tag {
-    background-color: rgba(16, 185, 129, 0.1);
-}
 
 .read-time::before {
     content: "·";

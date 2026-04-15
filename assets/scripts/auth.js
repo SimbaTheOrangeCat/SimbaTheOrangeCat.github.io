@@ -283,11 +283,11 @@
     function renderHeaderAuth() {
         const existing = document.getElementById('auth-btn-wrap');
         if (existing) existing.remove();
-        const themeToggle = document.getElementById('theme-toggle');
-        if (!themeToggle) return;
+        const navRight = document.querySelector('.nav-right');
+        if (!navRight) return;
 
         const el = _profile ? buildUserChip(_profile) : buildAuthButton();
-        themeToggle.parentNode.insertBefore(el, themeToggle);
+        navRight.appendChild(el);
 
         if (!_profile) {
             document.getElementById('auth-header-btn').addEventListener('click', openModal);
