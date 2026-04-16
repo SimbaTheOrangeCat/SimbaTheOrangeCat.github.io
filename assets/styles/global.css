@@ -100,24 +100,23 @@ h1, h2, h3, h4, .logo {
 .logo {
     font-size: 1.55rem;
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 400;
+    font-style: italic;
     display: flex;
     align-items: center;
     gap: 10px;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
 }
 
 .logo-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 7px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo:hover .logo-icon {
-    transform: rotate(-5deg) scale(1.06);
-    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+    transform: rotate(90deg) scale(1.05);
 }
 
 .nav-right {

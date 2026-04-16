@@ -6,7 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Mindful Breathing - Ayan's Blog</title>
-    <meta name="description" content="A warm and minimalist personal space on the internet.">
+    <meta name="description" content="Ever felt the world is too overwhelming to breathe? Learn how mindful breathing can help quiet anxiety by giving your prefrontal cortex back control — step by step.">
     <!-- Google Fonts: Lora (serif for coziness) and Inter (sans-serif for clean UI) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +52,193 @@
     margin-top: 48px;
     margin-bottom: 16px;
     color: var(--text-primary);
+}
+
+/* ── Callout ────────────────────────────────────────── */
+.callout {
+    background: var(--card-bg, rgba(255,255,255,0.04));
+    border-left: 4px solid var(--accent-color, #c0a06a);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-style: italic;
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.callout strong {
+    display: block;
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-color, #c0a06a);
+    margin-bottom: 8px;
+}
+
+/* ── Breathing Animation ─────────────────────────────── */
+.breathing-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 48px auto;
+    max-width: 280px;
+    text-align: center;
+}
+
+.breathing-circle-wrap {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.breathing-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color, #c0a06a);
+    opacity: 0.25;
+    animation: breathe-ring 16s ease-in-out infinite;
+}
+
+.breathing-core {
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,160,106,0.35) 0%, rgba(192,160,106,0.08) 100%);
+    animation: breathe-core 16s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breathing-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-color, #c0a06a);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: breathe-label 16s ease-in-out infinite;
+}
+
+@keyframes breathe-core {
+    0%           { transform: scale(1);    opacity: 0.7; }
+    37.5%        { transform: scale(1.35); opacity: 1; }   /* end inhale (6s) */
+    62.5%        { transform: scale(1.35); opacity: 1; }   /* end hold   (4s) */
+    100%         { transform: scale(1);    opacity: 0.7; } /* end exhale (6s) */
+}
+
+@keyframes breathe-ring {
+    0%,100%      { transform: scale(1);    opacity: 0.25; }
+    37.5%        { transform: scale(1.5);  opacity: 0.6; }
+    62.5%        { transform: scale(1.5);  opacity: 0.6; }
+}
+
+@keyframes breathe-label {
+    0%           { opacity: 0.6; } /* exhale state  */
+    10%          { opacity: 1;   } /* start inhale  */
+    37.5%        { opacity: 1;   } /* end inhale    */
+    38%          { opacity: 0.5; } /* hold state    */
+    62%          { opacity: 0.5; } /* end hold      */
+    63%          { opacity: 1;   } /* start exhale  */
+    90%          { opacity: 0.6; } /* end exhale    */
+    100%         { opacity: 0.6; }
+}
+
+.breathing-instruction {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 240px;
+}
+
+/* ── 6-4-6 Technique Card ───────────────────────────── */
+.technique-card {
+    background: var(--card-bg, rgba(255,255,255,0.04));
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px 28px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.technique-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c0a06a, #8abaad, #c0a06a);
+}
+
+.technique-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-color, #c0a06a);
+    margin-bottom: 20px;
+}
+
+.technique-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.technique-step {
+    text-align: center;
+    padding: 16px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.technique-step .ts-count {
+    font-family: 'Lora', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--accent-color, #c0a06a);
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.technique-step .ts-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.technique-step .ts-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.technique-tip {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.technique-tip strong {
+    color: var(--text-primary);
+}
+
+@media (max-width: 500px) {
+    .technique-steps { grid-template-columns: 1fr; }
 }
 
 .article-footer {
@@ -354,16 +541,72 @@
     </header>
 
     <div class="article-content">
+
         <p>Ever felt the world around you is too much intimidating? No matter what you do, what you think, it is always scary.</p>
         <p>The constant feeling of an irritation inside your chest, not able to breathe, or maybe you can, but just not enough to reach till the bottom of your lungs.</p>
         <p>We call it Anxiety.</p>
+
+        <h2>Why Breathing Changes Everything</h2>
+
         <p>The objective is to give your pre frontal cortex (PFC) the control of your brain from your limbic system.</p>
+
+        <div class="callout">
+            <strong>🧠 What's happening inside</strong>
+            The limbic system is your brain's alarm center — it triggers anxiety, fear, and that tight-chest feeling. Your prefrontal cortex (PFC) is the rational, calm part. Slow, intentional breathing is one of the fastest ways to shift control back to the PFC. You are literally rewiring the moment.
+        </div>
+
         <p>Lets walk it through together, how a simple mindful breathing can help you realize that you are OK, you are FINE.</p>
+
+        <h2>Let's Begin</h2>
+
         <p>Let's take a long breath in, hold it, then release it. It is not simple, it takes time, patience and practice.</p>
-        <p>Focus on your body, feel where it hurts, or where it is uncomfortable. If possible keep your palm on your chest and feel yourself taking a deep breath. Now, I want you to focus on the breath that you take. Inhale for exactly 6 seconds, hold it for exactly 4 seconds and exhale for exactly 6 seconds. Repeat it, but this time keep counting on your head from 1 to 6, then 1 to 4, then 1 to 6 again. Don't listen to your heartbeat, we make this mistake often trying to sync our heartbeat with seconds, it will only make you more uncomfortable. If possible, try tapping your fingers, or your legs or anywhere on your body which feels comfortable, to keep a count of seconds.</p>
+
+        <p>Focus on your body, feel where it hurts, or where it is uncomfortable. If possible keep your palm on your chest and feel yourself taking a deep breath.</p>
+
+        <!-- Animated Breathing Guide -->
+        <div class="breathing-widget" aria-label="Breathing guide animation" role="img">
+            <div class="breathing-circle-wrap">
+                <div class="breathing-ring"></div>
+                <div class="breathing-core">
+                    <span class="breathing-label">Breathe</span>
+                </div>
+            </div>
+            <p class="breathing-instruction">Follow the circle — let it guide your breath. Expand with it, hold, then release slowly.</p>
+        </div>
+
+        <p>Now, I want you to focus on the breath that you take. Here is the pattern to follow:</p>
+
+        <!-- 6-4-6 Technique Card -->
+        <div class="technique-card">
+            <p class="technique-card-title">⏱ The 6 – 4 – 6 Breathing Technique</p>
+            <div class="technique-steps">
+                <div class="technique-step">
+                    <div class="ts-count">6</div>
+                    <div class="ts-label">Inhale</div>
+                    <div class="ts-desc">Count 1 to 6 slowly</div>
+                </div>
+                <div class="technique-step">
+                    <div class="ts-count">4</div>
+                    <div class="ts-label">Hold</div>
+                    <div class="ts-desc">Count 1 to 4, stay still</div>
+                </div>
+                <div class="technique-step">
+                    <div class="ts-count">6</div>
+                    <div class="ts-label">Exhale</div>
+                    <div class="ts-desc">Count 1 to 6, release</div>
+                </div>
+            </div>
+            <p class="technique-tip"><strong>Tip:</strong> Don't listen to your heartbeat — we make this mistake often, trying to sync our heartbeat with seconds, and it will only make you more uncomfortable. Instead, try tapping your fingers, or your legs, or anywhere on your body which feels comfortable, to keep a count of seconds.</p>
+        </div>
+
         <p>Repeat the whole process again for at least 10 times. It will be hard, but practicing it at your comfort zone every day will help you do it during stressful situations.</p>
-        <p>There is also an advanced version of it - You will do what you are doing just modify it a little bit. You have to visualize the breath going in, from your nose, then to lungs, then to the bottom of the lungs.</p>
+
+        <h2>The Advanced Version</h2>
+
+        <p>There is also an advanced version of it — you will do what you are doing, just modify it a little bit. You have to visualize the breath going in, from your nose, then to lungs, then to the bottom of the lungs.</p>
+
         <p>I hope you feel better :)</p>
+
     </div>
 
     <!-- ── Reactions ── -->
