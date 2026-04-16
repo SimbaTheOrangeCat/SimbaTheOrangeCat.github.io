@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art of Mindful Breathing - Ayan's Blog</title>
-    <meta name="description" content="Ever felt the world is too overwhelming to breathe? Learn how mindful breathing can help quiet anxiety by giving your prefrontal cortex back control — step by step.">
+    <title>The Nap Panic - Mindfactor</title>
+    <meta name="description" content="Waking up from a short nap with a pounding chest makes you feel betrayed by your own nervous system.">
     <!-- Google Fonts: Lora (serif for coziness) and Inter (sans-serif for clean UI) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=block"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/global.css">
-    
+
 <style>
 .article-header {
     text-align: center;
@@ -46,199 +46,6 @@
 
 .article-content p {
     margin-bottom: 24px;
-}
-
-.article-content h2, .article-content h3 {
-    margin-top: 48px;
-    margin-bottom: 16px;
-    color: var(--text-primary);
-}
-
-/* ── Callout ────────────────────────────────────────── */
-.callout {
-    background: var(--card-bg, rgba(255,255,255,0.04));
-    border-left: 4px solid var(--accent-color, #c0a06a);
-    border-radius: 0 12px 12px 0;
-    padding: 20px 24px;
-    margin: 32px 0;
-    font-style: italic;
-    font-family: 'Lora', serif;
-    font-size: 1.1rem;
-    color: var(--text-primary);
-    line-height: 1.7;
-}
-
-.callout strong {
-    display: block;
-    font-style: normal;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-color, #c0a06a);
-    margin-bottom: 8px;
-}
-
-/* ── Breathing Animation ─────────────────────────────── */
-.breathing-widget {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 60px;
-    margin: 48px auto;
-    max-width: 280px;
-    text-align: center;
-}
-
-.breathing-circle-wrap {
-    position: relative;
-    width: 180px;
-    height: 180px;
-}
-
-.breathing-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 3px solid var(--accent-color, #c0a06a);
-    opacity: 0.25;
-    animation: breathe-ring 16s ease-in-out infinite;
-}
-
-.breathing-core {
-    position: absolute;
-    inset: 20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(192,160,106,0.35) 0%, rgba(192,160,106,0.08) 100%);
-    animation: breathe-core 16s ease-in-out infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.breathing-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent-color, #c0a06a);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    animation: breathe-label 16s ease-in-out infinite;
-}
-
-@keyframes breathe-core {
-    0%           { transform: scale(1);    opacity: 0.7; }
-    37.5%        { transform: scale(1.35); opacity: 1; }   /* end inhale (6s) */
-    62.5%        { transform: scale(1.35); opacity: 1; }   /* end hold   (4s) */
-    100%         { transform: scale(1);    opacity: 0.7; } /* end exhale (6s) */
-}
-
-@keyframes breathe-ring {
-    0%,100%      { transform: scale(1);    opacity: 0.25; }
-    37.5%        { transform: scale(1.5);  opacity: 0.6; }
-    62.5%        { transform: scale(1.5);  opacity: 0.6; }
-}
-
-@keyframes breathe-label {
-    0%           { opacity: 0.6; } /* exhale state  */
-    10%          { opacity: 1;   } /* start inhale  */
-    37.5%        { opacity: 1;   } /* end inhale    */
-    38%          { opacity: 0.5; } /* hold state    */
-    62%          { opacity: 0.5; } /* end hold      */
-    63%          { opacity: 1;   } /* start exhale  */
-    90%          { opacity: 0.6; } /* end exhale    */
-    100%         { opacity: 0.6; }
-}
-
-.breathing-instruction {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 240px;
-}
-
-/* ── 6-4-6 Technique Card ───────────────────────────── */
-.technique-card {
-    background: var(--card-bg, rgba(255,255,255,0.04));
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 32px 28px;
-    margin: 40px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.technique-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #c0a06a, #8abaad, #c0a06a);
-}
-
-.technique-card-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-color, #c0a06a);
-    margin-bottom: 20px;
-}
-
-.technique-steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.technique-step {
-    text-align: center;
-    padding: 16px 8px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.technique-step .ts-count {
-    font-family: 'Lora', serif;
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--accent-color, #c0a06a);
-    line-height: 1;
-    margin-bottom: 6px;
-}
-
-.technique-step .ts-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    margin-bottom: 4px;
-}
-
-.technique-step .ts-desc {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-}
-
-.technique-tip {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-color);
-}
-
-.technique-tip strong {
-    color: var(--text-primary);
-}
-
-@media (max-width: 500px) {
-    .technique-steps { grid-template-columns: 1fr; }
 }
 
 .article-footer {
@@ -285,7 +92,6 @@
     margin-bottom: 36px;
 }
 
-/* Form */
 .comment-form {
     background: var(--card-bg, rgba(255,255,255,0.04));
     border: 1px solid var(--border-color);
@@ -342,10 +148,7 @@
     box-shadow: 0 0 0 3px rgba(192,160,106,0.13);
 }
 
-.comment-textarea {
-    min-height: 110px;
-    line-height: 1.6;
-}
+.comment-textarea { min-height: 110px; line-height: 1.6; }
 
 .comment-form-footer {
     display: flex;
@@ -362,11 +165,7 @@
     font-variant-numeric: tabular-nums;
 }
 
-.comment-form-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.comment-form-actions { display: flex; align-items: center; gap: 12px; }
 
 .comment-success-msg {
     display: none;
@@ -389,26 +188,11 @@
     letter-spacing: 0.01em;
 }
 
-.comment-submit-btn:hover {
-    background: var(--accent-hover, #a8885a);
-    transform: translateY(-1px);
-}
+.comment-submit-btn:hover { background: var(--accent-hover, #a8885a); transform: translateY(-1px); }
+.comment-submit-btn:active { transform: translateY(0); }
+.comment-submit-btn.comment-btn--success { background: #7aad7a; }
+.comment-submit-btn:disabled { opacity: 0.75; cursor: not-allowed; transform: none; }
 
-.comment-submit-btn:active {
-    transform: translateY(0);
-}
-
-.comment-submit-btn.comment-btn--success {
-    background: #7aad7a;
-}
-
-.comment-submit-btn:disabled {
-    opacity: 0.75;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Empty state */
 .comments-empty {
     text-align: center;
     padding: 32px;
@@ -419,18 +203,9 @@
     margin-bottom: 8px;
 }
 
-.comments-empty span {
-    display: block;
-    font-size: 2rem;
-    margin-bottom: 8px;
-}
+.comments-empty span { display: block; font-size: 2rem; margin-bottom: 8px; }
 
-/* Comment cards */
-.comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+.comments-list { display: flex; flex-direction: column; gap: 20px; }
 
 .comment-card {
     display: flex;
@@ -444,18 +219,13 @@
 }
 
 .comment-avatar {
-    width: 42px;
-    height: 42px;
+    width: 42px; height: 42px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     color: #fff;
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    letter-spacing: 0.02em;
+    font-size: 0.85rem; font-weight: 700;
+    flex-shrink: 0; letter-spacing: 0.02em;
 }
 
 .comment-body {
@@ -467,34 +237,12 @@
     transition: border-color 0.25s;
 }
 
-.comment-body:hover {
-    border-color: var(--accent-color, #c0a06a);
-}
+.comment-body:hover { border-color: var(--accent-color, #c0a06a); }
 
-.comment-header {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 8px;
-}
-
-.comment-author {
-    font-weight: 600;
-    font-size: 0.97rem;
-    color: var(--text-primary);
-}
-
-.comment-date {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.comment-text {
-    font-size: 0.97rem;
-    line-height: 1.7;
-    color: var(--text-primary);
-    margin: 0;
-}
+.comment-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.comment-author { font-weight: 600; font-size: 0.97rem; color: var(--text-primary); }
+.comment-date { font-size: 0.8rem; color: var(--text-secondary); }
+.comment-text { font-size: 0.97rem; line-height: 1.7; color: var(--text-primary); margin: 0; }
 
 @media (max-width: 600px) {
     .comment-form-row { flex-direction: column; }
@@ -511,7 +259,7 @@
     </div>
     <header class="site-header">
         <div class="container header-inner">
-            <a href="index.html" class="logo"><img src="assets/logo-nav.svg?v=2" class="logo-icon" alt="" width="28" height="28" aria-hidden="true">Mindfactor.</a>
+            <a href="index.html" class="logo"><img src="favicon.svg?v=2" class="logo-icon" alt="" width="28" height="28" aria-hidden="true">Mindfactor.</a>
             <div class="nav-right">
                 <nav class="main-nav">
                     <a href="index.html">Home</a>
@@ -520,100 +268,63 @@
                     <a href="search.html">Search</a>
                     <a href="journal.html" class="nav-journal-btn">My Journal</a>
                 </nav>
-
             </div>
         </div>
     </header>
 
     <main class="main-content">
-        
+
 <article class="container fade-up">
     <header class="article-header">
         <div class="meta-tags" style="justify-content: center; margin-bottom: 24px;">
-            <span class="category-tag">Mindfulness</span>
+            <span class="category-tag">Panic</span>
         </div>
-        <img src="assets/images/breathing-hero.png" alt="Hero Graphic" style="width: 100%; max-width: 680px; height: 350px; object-fit: cover; border-radius: 16px; margin: 0 auto 32px; display: block;">
-        <h1 class="article-title">Art of Mindful Breathing</h1>
+        <img src="assets/images/nap-panic.png" alt="A quiet afternoon room" style="width: 100%; max-width: 680px; height: 350px; object-fit: cover; border-radius: 16px; margin: 0 auto 32px; display: block;">
+        <h1 class="article-title">The Nap Panic</h1>
         <div class="article-meta">
-            <span>Mar 27, 2026</span>
+            <span>Apr 16, 2026</span>
             <span style="color: var(--border-color);">&bull;</span>
             <span>3 min read</span>
         </div>
-    
+        
         <!-- ── Quick Links ── -->
         <div class="quick-links" style="margin-top: 24px; font-size: 0.9rem; flex-wrap: wrap; display: flex; justify-content: center; gap: 12px; color: var(--text-secondary);">
             <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;">In this post:</span>
             <a href="art-of-mindful-breathing.html" style="color: var(--accent-color); text-decoration: none;">How breathing helps</a> &bull;
-            <a href="letting-go-of-small-things.html" style="color: var(--accent-color); text-decoration: none;">When anxiety spirals</a>
+            <a href="letting-go-of-small-things.html" style="color: var(--accent-color); text-decoration: none;">When anxiety spirals</a> &bull;
+            <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/panic-attacks/about-panic-attacks/" target="_blank" style="color: var(--accent-color); text-decoration: none;">What panic actually is</a>
         </div>
     </header>
 
     <div class="article-content">
 
-        <p>Ever felt the world around you is too much intimidating? No matter what you do, what you think, it is always scary.</p>
-        <p>The constant feeling of an irritation inside your chest, not able to breathe, or maybe you can, but just not enough to reach till the bottom of your lungs.</p>
-        <p>We call it Anxiety.</p>
+        <p>You close your eyes just to catch a quick break, and suddenly your eyes snap open. Your heart is already hammering against your ribs, yanking you from a 15-minute power nap straight into pure, breathless panic.</p>
 
-        <h2>Why Breathing Changes Everything</h2>
+        <p>It's the nap panic. The kind where you just needed a tiny moment of rest, but your body decided to wake up entirely convinced you're in immediate danger.</p>
+        
+        <p>The afternoon sun might be coming right through the blinds, but the room feels entirely wrong. <em>I just wanted to close my eyes and reset.</em> Instead, I'm sitting up, the blanket is twisted around my legs, and every shallow breath feels like it's not enough air. I check the clock and I've barely been asleep for twenty minutes. I'm suddenly wide awake and completely terrified while everyone else is just having a normal Tuesday afternoon.</p>
 
-        <p>The objective is to give your pre frontal cortex (PFC) the control of your brain from your limbic system.</p>
+        <p>It's an incredibly specific, exhausting kind of frustration. Sleep is supposed to be the one place we can go to turn the volume down. Waking up from a short nap with a pounding chest makes you feel betrayed by your own nervous system. <strong>It feels like the rest of the afternoon is ruined before it even starts.</strong> There's this heavy guilt because you somehow woke up feeling worse than before you tried to rest.</p>
 
-        <div class="callout">
-            <strong>🧠 What's happening inside</strong>
-            The limbic system is your brain's alarm center — it triggers anxiety, fear, and that tight-chest feeling. Your prefrontal cortex (PFC) is the rational, calm part. Slow, intentional breathing is one of the fastest ways to shift control back to the PFC. You are literally rewiring the moment.
+        <div style="text-align: center; font-size: 1.5rem; color: var(--border-color); margin: 32px 0;">&bull; &nbsp; &bull; &nbsp; &bull;</div>
+
+        <p>I have to remind myself that my body just got confused dropping into sleep. It misfired. It accidentally hit the emergency button on the way down, or on the way back up. It feels absolutely horrible, but it's just a false alarm.</p>
+
+        <div style="border-left: 3px solid var(--accent-color); padding: 16px 24px; margin: 32px 0; background-color: var(--surface-color); border-radius: 0 8px 8px 0; font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-primary); font-style: italic;">
+            The siren is incredibly loud, but there is no actual fire.
         </div>
 
-        <p>Lets walk it through together, how a simple mindful breathing can help you realize that you are OK, you are FINE.</p>
+        <p>Trying to force my eyes shut again right now is useless while my blood is rushing like this. So I just slowly sit up. I don't try to stop the racing heart, because fighting panic only makes it louder. Instead, I try to grab onto one doable thing at a time:</p>
 
-        <h2>Let's Begin</h2>
+        <ul style="margin-bottom: 24px; padding-left: 20px;">
+            <li style="margin-bottom: 8px;">I put my bare feet flat on the floor and focus on how heavy they feel against the ground.</li>
+            <li style="margin-bottom: 8px;">I take a small sip of water.</li>
+            <li style="margin-bottom: 8px;">I find a spot on the wall and just stare at it for a second.</li>
+        </ul>
 
-        <p>Let's take a long breath in, hold it, then release it. It is not simple, it takes time, patience and practice.</p>
+        <p>I'm just waiting for that random spike of adrenaline to slowly burn itself off.</p>
 
-        <p>Focus on your body, feel where it hurts, or where it is uncomfortable. If possible keep your palm on your chest and feel yourself taking a deep breath.</p>
-
-        <!-- Animated Breathing Guide -->
-        <div class="breathing-widget" aria-label="Breathing guide animation" role="img">
-            <div class="breathing-circle-wrap">
-                <div class="breathing-ring"></div>
-                <div class="breathing-core">
-                    <span class="breathing-label">Breathe</span>
-                </div>
-            </div>
-            <p class="breathing-instruction">Follow the circle — let it guide your breath. Expand with it, hold, then release slowly.</p>
-        </div>
-
-        <p>Now, I want you to focus on the breath that you take. Here is the pattern to follow:</p>
-
-        <!-- 6-4-6 Technique Card -->
-        <div class="technique-card">
-            <p class="technique-card-title">⏱ The 6 – 4 – 6 Breathing Technique</p>
-            <div class="technique-steps">
-                <div class="technique-step">
-                    <div class="ts-count">6</div>
-                    <div class="ts-label">Inhale</div>
-                    <div class="ts-desc">Count 1 to 6 slowly</div>
-                </div>
-                <div class="technique-step">
-                    <div class="ts-count">4</div>
-                    <div class="ts-label">Hold</div>
-                    <div class="ts-desc">Count 1 to 4, stay still</div>
-                </div>
-                <div class="technique-step">
-                    <div class="ts-count">6</div>
-                    <div class="ts-label">Exhale</div>
-                    <div class="ts-desc">Count 1 to 6, release</div>
-                </div>
-            </div>
-            <p class="technique-tip"><strong>Tip:</strong> Don't listen to your heartbeat — we make this mistake often, trying to sync our heartbeat with seconds, and it will only make you more uncomfortable. Instead, try tapping your fingers, or your legs, or anywhere on your body which feels comfortable, to keep a count of seconds.</p>
-        </div>
-
-        <p>Repeat the whole process again for at least 10 times. It will be hard, but practicing it at your comfort zone every day will help you do it during stressful situations.</p>
-
-        <h2>The Advanced Version</h2>
-
-        <p>There is also an advanced version of it — you will do what you are doing, just modify it a little bit. You have to visualize the breath going in, from your nose, then to lungs, then to the bottom of the lungs.</p>
-
-        <p>I hope you feel better :)</p>
+        <p>It's a really rough way to wake up, especially when you just wanted a break from a long day. I know. But the panic will fade. We just have to give our bodies a few minutes to look around and realize we're actually still safe.</p>
 
     </div>
 
@@ -632,7 +343,6 @@
         </div>
     </footer>
 
-    
     <!-- ── Other Posts ── -->
     <section style="max-width: 680px; margin: 64px auto 0; padding-top: 48px; border-top: 1px solid var(--border-color);">
         <h2 style="font-family: 'Lora', serif; font-size: 1.4rem; color: var(--text-primary); margin-bottom: 24px;">✨ You might want to read these too...</h2>
@@ -671,7 +381,6 @@
         </form>
         <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 16px;">Unsubscribe anytime. Your inbox deserves kindness too.</p>
     </section>
-
 
     <!-- ── Comment Section ── -->
     <section class="comments-section" id="comments" aria-label="Comments">
@@ -720,10 +429,18 @@
             <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0;">For the ones who feel everything a little too loudly.</p>
             
             <div style="display: flex; gap: 12px; margin: 16px 0;">
-                <a href="#" aria-label="Facebook" style="color: var(--text-secondary); transition: color 0.2s;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-                <a href="#" aria-label="X" style="color: var(--text-secondary); transition: color 0.2s;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                <a href="#" aria-label="Instagram" style="color: var(--text-secondary); transition: color 0.2s;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-                <a href="#" aria-label="LinkedIn" style="color: var(--text-secondary); transition: color 0.2s;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+                <a href="#" aria-label="Facebook" style="color: var(--text-secondary); transition: color 0.2s;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" aria-label="X" style="color: var(--text-secondary); transition: color 0.2s;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram" style="color: var(--text-secondary); transition: color 0.2s;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" style="color: var(--text-secondary); transition: color 0.2s;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
             </div>
             
             <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 24px; min-width: 250px;">
