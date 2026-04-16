@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!--
+    Concept C — "Flow M"
+    Two smooth arcs forming a flowing M, suggesting a mind-wave / neural pattern.
+    Designed to render crisply at 28×28px on a dark background.
+  -->
+
+  <!-- Main flowing M path: smooth double-hump curve -->
+  <path
+    d="M 3 25
+       C 3 25  3  8  9  8
+       C 15  8 13 19 16 19
+       C 19 19 17  8 23  8
+       C 29  8 29 25 29 25"
+    stroke="white"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Tiny period dot — the "." in Mindfactor. — subtle accent at the bottom center -->
+  <circle cx="16" cy="27.5" r="1.4" fill="rgba(255,255,255,0.55)" />
+</svg>
