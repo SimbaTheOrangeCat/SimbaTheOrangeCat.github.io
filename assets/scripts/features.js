@@ -428,7 +428,7 @@
             document.getElementById('mf-bm-btn')?.remove();
             document.getElementById('mf-reflect')?.remove();
             localStorage.removeItem('mf_cached_accent');
-            applyAccent('#059669'); // reset to new theme default
+            applyAccent('#c0a06a'); // reset to new theme default
             _initDone = false;
             return;
         }
