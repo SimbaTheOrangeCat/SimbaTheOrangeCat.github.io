@@ -55,4 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
             progressBar.style.width = scrolled + "%";
         }, { passive: true });
     }
+
+    // === 5. Dreamy Sky Cloud Generator ===
+    const sky = document.createElement('div');
+    sky.id = 'sky-canvas';
+    document.body.appendChild(sky);
+    
+    // Create subtle moving clouds
+    for(let i=0; i<3; i++) {
+        const cloud = document.createElement('div');
+        cloud.className = 'sky-cloud';
+        // Randomize size between 300px and 800px
+        cloud.style.width = Math.random() * 500 + 300 + 'px';
+        cloud.style.height = Math.random() * 120 + 80 + 'px';
+        // Placed across the top and middle horizon randomly
+        cloud.style.top = Math.random() * 60 + '%';
+        // Drift across screen slowly: between 50s and 100s
+        cloud.style.animationDuration = Math.random() * 50 + 50 + 's';
+        // Start them at different times so it looks natural
+        cloud.style.animationDelay = Math.random() * -60 + 's';
+        
+        // Use the CSS vars defined in our stylesheet
+        cloud.style.setProperty('--cloud-max-opacity', Math.random() * 0.15 + 0.08);
+        cloud.style.setProperty('--cloud-sway', Math.random() * 60 - 30 + 'px');
+        
+        sky.appendChild(cloud);
+    }
+
 });

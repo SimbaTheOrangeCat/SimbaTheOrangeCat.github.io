@@ -27,7 +27,7 @@
 
 body {
     /* Dreamy night sky image — fixed so it never scrolls */
-    background-image: url('../assets/dreamy-sky-bg.png');
+    background-image: url('../assets/silver-moonlit-sky.png');
     background-attachment: fixed;
     background-size: cover;
     background-position: center top;
