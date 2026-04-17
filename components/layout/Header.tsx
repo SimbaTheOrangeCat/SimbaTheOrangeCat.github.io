@@ -39,15 +39,19 @@ export default function Header() {
     <>
       <header
         className={[
-          'sticky top-0 z-50 bg-[var(--header-bg)] border-b border-[var(--border-color)]',
-          'transition-[background-color,border-color,box-shadow] duration-300',
-          scrolled ? 'shadow-[0_1px_16px_rgba(0,0,0,0.06)]' : '',
+          'sticky top-0 z-50 w-full border-b border-[var(--border-color)]',
+          'transition-[background-color,backdrop-filter,-webkit-backdrop-filter,box-shadow,border-color] duration-300',
+          // Frosted glass: blur content behind the bar (stronger while scrolling)
+          scrolled
+            ? 'bg-[rgba(8,12,35,0.62)] backdrop-blur-xl backdrop-saturate-150 [-webkit-backdrop-filter:blur(20px)] shadow-[0_8px_32px_rgba(0,0,0,0.35)] border-[var(--border-color)]/80'
+            : 'bg-[rgba(10,14,40,0.45)] backdrop-blur-md backdrop-saturate-125 [-webkit-backdrop-filter:blur(12px)]',
         ].join(' ')}
       >
-        <div className="container-content flex items-center h-[66px]">
-          {/* Hamburger */}
+        {/* Full-width row: menu flush left, logo centered in viewport, auth flush right */}
+        <div className="relative flex w-full items-center justify-between h-[66px] pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-6 md:pr-6">
+          {/* Hamburger — left */}
           <button
-            className="flex w-9 h-9 flex-col items-center justify-center gap-[5px] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200"
+            className="relative z-[1] flex w-9 h-9 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200"
             onClick={() => setSidebarOpen(prev => !prev)}
             aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={sidebarOpen}
@@ -57,10 +61,10 @@ export default function Header() {
             <span className="block w-[18px] h-0.5 bg-current" />
           </button>
 
-          {/* Logo — centered */}
+          {/* Logo — centered on viewport */}
           <Link
             href="/"
-            className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 font-serif text-[1.45rem] font-bold tracking-[-0.02em] text-[var(--text-primary)] hover:text-[var(--text-primary)] group"
+            className="absolute left-1/2 top-1/2 z-[1] flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 font-serif text-[1.45rem] font-bold tracking-[-0.02em] text-[var(--text-primary)] hover:text-[var(--text-primary)] group pointer-events-auto"
           >
             <Image
               src="/assets/logo-nav.svg"
@@ -73,7 +77,8 @@ export default function Header() {
             Mindfactor.
           </Link>
 
-          <div className="ml-auto">
+          {/* Sign in / out — right */}
+          <div className="relative z-[1] shrink-0">
             {user ? (
               <button
                 onClick={() => void signOut()}
