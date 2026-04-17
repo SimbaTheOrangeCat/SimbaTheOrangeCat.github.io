@@ -152,9 +152,11 @@
   font-size: 1.55rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-top: 3.5rem;
-  margin-bottom: 0.75rem;
+  margin-top: 3.75rem;
+  margin-bottom: 0.85rem;
   color: var(--text-primary);
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--accent-color);
 }
 
 .prose-content h3 {
@@ -212,14 +214,14 @@
 
 .prose-content blockquote {
   border-left: 3px solid var(--accent-color);
-  padding: 0.75rem 1.25rem;
-  margin: 2.5rem 0;
+  padding: 1rem 1.5rem;
+  margin: 2.75rem 0;
   background-color: var(--accent-subtle);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 10px 10px 0;
   color: var(--text-primary);
   font-style: italic;
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: 1.15rem;
+  line-height: 1.75;
 }
 
 .prose-content code {
@@ -346,8 +348,8 @@
 .article-end-cta {
   background-color: var(--accent-subtle);
   border: 1px solid var(--accent-ring);
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
   text-align: center;
 }
 
