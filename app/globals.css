@@ -10,8 +10,14 @@
   --text-secondary: #71717A;
   --accent-color: #059669;
   --accent-hover: #047857;
+  --accent-subtle: rgba(5, 150, 105, 0.08);
+  --accent-ring: rgba(5, 150, 105, 0.15);
   --border-color: #E4E4E7;
+  --border-subtle: #F1F1F4;
   --header-bg: #FFFFFF;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.10);
+  --shadow-accent: 0 4px 16px rgba(5, 150, 105, 0.20);
 }
 
 
@@ -206,11 +212,14 @@
 
 .prose-content blockquote {
   border-left: 3px solid var(--accent-color);
-  padding: 0.25rem 0 0.25rem 1.25rem;
-  margin: 2rem 0;
-  color: var(--text-secondary);
+  padding: 0.75rem 1.25rem;
+  margin: 2.5rem 0;
+  background-color: var(--accent-subtle);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-primary);
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
 
 .prose-content code {
@@ -230,10 +239,30 @@
   letter-spacing: 0.9px;
   text-transform: uppercase;
   color: var(--accent-color);
-  background-color: rgba(5, 150, 105, 0.08);
+  background-color: var(--accent-subtle);
   padding: 3px 9px;
   border-radius: 99px;
   transition: background-color 0.2s ease;
+}
+
+/* ─── Tag Chip (inline post tags, lighter weight) ──────────────────── */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--text-secondary);
+  background-color: var(--border-subtle);
+  border: 1px solid var(--border-color);
+  padding: 2px 8px;
+  border-radius: 99px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tag-chip:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 /* ─── Post Card ────────────────────────────────────────────────────── */
@@ -293,4 +322,50 @@
   height: 2px;
   background-color: var(--accent-color);
   border-radius: 2px;
+}
+
+/* ─── Featured Story Card ──────────────────────────────────────────── */
+.featured-story-card {
+  display: block;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-story-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-card-hover);
+  color: inherit;
+}
+
+/* ─── Article End CTA ──────────────────────────────────────────────── */
+.article-end-cta {
+  background-color: var(--accent-subtle);
+  border: 1px solid var(--accent-ring);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* ─── Nav active indicator ─────────────────────────────────────────── */
+.nav-link-active {
+  color: var(--text-primary);
+  background-color: var(--border-color);
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
 }
