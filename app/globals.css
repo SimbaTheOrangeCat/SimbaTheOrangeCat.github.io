@@ -4,20 +4,20 @@
 
 /* ─── Brand Tokens — Light ─────────────────────────────────────────── */
 :root {
-  --bg-color: #F7F8FC;
-  --surface-color: #FFFFFF;
-  --text-primary: #09090B;
-  --text-secondary: #71717A;
-  --accent-color: #059669;
-  --accent-hover: #047857;
-  --accent-subtle: rgba(5, 150, 105, 0.08);
-  --accent-ring: rgba(5, 150, 105, 0.15);
-  --border-color: #E4E4E7;
-  --border-subtle: #F1F1F4;
-  --header-bg: #FFFFFF;
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.10);
-  --shadow-accent: 0 4px 16px rgba(5, 150, 105, 0.20);
+  --bg-color: #0d1b3e;
+  --surface-color: rgba(15, 20, 50, 0.72);
+  --text-primary: #f0efff;
+  --text-secondary: #b0aed0;
+  --accent-color: #c0a06a;
+  --accent-hover: #a8885a;
+  --accent-subtle: rgba(192, 160, 106, 0.12);
+  --accent-ring: rgba(192, 160, 106, 0.30);
+  --border-color: rgba(167, 139, 250, 0.22);
+  --border-subtle: rgba(167, 139, 250, 0.12);
+  --header-bg: rgba(10, 14, 40, 0.55);
+  --shadow-card: 0 8px 36px rgba(0, 0, 0, 0.28);
+  --shadow-card-hover: 0 16px 56px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 6px 22px rgba(192, 160, 106, 0.32);
 }
 
 
@@ -44,6 +44,13 @@
   }
 
   body {
+    background-image:
+      linear-gradient(rgba(7, 10, 30, 0.38), rgba(7, 10, 30, 0.38)),
+      url('/assets/silver-moonlit-sky.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     background-color: var(--bg-color);
     color: var(--text-primary);
     font-family: var(--font-inter), 'Inter', sans-serif;
@@ -342,6 +349,37 @@
   border-color: var(--accent-color);
   box-shadow: var(--shadow-card-hover);
   color: inherit;
+}
+
+/* ─── Post Hero ─────────────────────────────────────────────────────── */
+.post-hero-figure {
+  position: relative;
+}
+
+.post-hero-media {
+  position: relative;
+  height: min(54vw, 420px);
+  min-height: 280px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  animation: floatHero 7.5s ease-in-out infinite;
+}
+
+.post-hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.18));
+}
+
+@keyframes floatHero {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
 }
 
 /* ─── Article End CTA ──────────────────────────────────────────────── */

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getPostBySlug, getPostSlugs, getAllPosts } from '@/lib/content/posts'
@@ -28,6 +29,14 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) notFound()
+
+  const fallbackHeroBySlug: Record<string, string> = {
+    'art-of-mindful-breathing': '/assets/images/breathing-hero.png',
+    'cozy-productivity': '/assets/images/productivity-hero.png',
+    'warmth-in-minimalism': '/assets/images/minimalism-hero.png',
+    'art-of-slow-living': '/assets/images/slow-living-hero.png',
+  }
+  const heroImage = post.coverImage ?? fallbackHeroBySlug[post.slug]
 
   // Related posts: same category, excluding current
   const related = getAllPosts()
@@ -97,6 +106,23 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             )}
           </header>
+
+          {heroImage && (
+            <div className="container-prose mb-14">
+              <figure className="post-hero-figure">
+                <div className="post-hero-media">
+                  <Image
+                    src={heroImage}
+                    alt={`${post.title} hero image`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 680px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </figure>
+            </div>
+          )}
 
           {/* ── Article Body ───────────────────────────────── */}
           <div className="prose-content container-prose mb-20">

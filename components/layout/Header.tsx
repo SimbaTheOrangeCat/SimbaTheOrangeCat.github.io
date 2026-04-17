@@ -61,7 +61,7 @@ export default function Header() {
             className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 font-serif text-[1.45rem] font-bold tracking-[-0.02em] text-[var(--text-primary)] hover:text-[var(--text-primary)] group"
           >
             <Image
-              src="/favicon.svg"
+              src="/assets/logo-nav.svg"
               alt=""
               width={26}
               height={26}
@@ -100,7 +100,7 @@ export default function Header() {
             className="flex items-center gap-2 font-serif text-[1.1rem] font-bold tracking-[-0.02em] text-[var(--text-primary)]"
           >
             <Image
-              src="/favicon.svg"
+              src="/assets/logo-nav.svg"
               alt=""
               width={20}
               height={20}

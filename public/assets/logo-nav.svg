@@ -1,0 +1,8 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer dashed ring -->
+  <circle cx="18" cy="18" r="15" stroke="#c0a06a" stroke-width="1.4" stroke-dasharray="4 3" stroke-linecap="round" opacity="0.55"/>
+  <!-- Middle solid ring -->
+  <circle cx="18" cy="18" r="10" stroke="#c0a06a" stroke-width="1.8" opacity="0.85"/>
+  <!-- Inner dot -->
+  <circle cx="18" cy="18" r="2.5" fill="#c0a06a"/>
+</svg>
