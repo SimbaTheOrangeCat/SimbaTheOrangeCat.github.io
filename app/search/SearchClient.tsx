@@ -22,31 +22,74 @@ export default function SearchClient({ posts }: Props) {
     )
   }, [query, posts])
 
+  const hasQuery = query.trim().length > 0
+
+  // Unique categories for the no-query browse state
+  const categories = useMemo(
+    () => Array.from(new Set(posts.map(p => p.category))).sort(),
+    [posts],
+  )
+
   return (
     <div>
-      {/* Search input */}
-      <div className="relative mb-10">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] pointer-events-none">
-          🔍
+      {/* ── Search Input ─────────────────────────────────────── */}
+      <div className="relative mb-8">
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] pointer-events-none text-base leading-none">
+          &#128269;
         </span>
         <input
           type="search"
           value={query}
           onChange={e => setQuery(e.target.value)}
-          placeholder="Search by title, category, or tag…"
-          className="w-full pl-11 pr-4 py-3 rounded-[10px] border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_rgba(5,150,105,0.12)] transition-all duration-200"
+          placeholder="Search by title, category, or tag&#8230;"
+          className="w-full pl-11 pr-10 py-3.5 rounded-[10px] border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_rgba(5,150,105,0.12)] transition-all duration-200"
           autoFocus
         />
+        {hasQuery && (
+          <button
+            onClick={() => setQuery('')}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-[var(--border-color)] hover:bg-[var(--text-secondary)] text-[var(--text-secondary)] hover:text-white transition-all duration-150 text-xs font-bold"
+            aria-label="Clear search"
+          >
+            &#215;
+          </button>
+        )}
       </div>
 
-      {/* Results */}
-      {query && results.length === 0 ? (
+      {/* ── Results count ────────────────────────────────────── */}
+      {hasQuery && (
+        <p className="text-xs text-[var(--text-secondary)] mb-6">
+          {results.length === 0
+            ? 'No results'
+            : `${results.length} result${results.length !== 1 ? 's' : ''}`}{' '}
+          for &ldquo;<span className="font-medium text-[var(--text-primary)]">{query}</span>&rdquo;
+        </p>
+      )}
+
+      {/* ── No results state ─────────────────────────────────── */}
+      {hasQuery && results.length === 0 && (
         <div className="text-center py-16 text-[var(--text-secondary)]">
-          <p className="text-4xl mb-4">🌿</p>
-          <p className="text-lg font-serif">No results for &ldquo;{query}&rdquo;</p>
-          <p className="text-sm mt-2">Try a different keyword or browse all posts.</p>
+          <p className="text-4xl mb-4">&#127807;</p>
+          <p className="font-serif text-lg text-[var(--text-primary)] mb-2">
+            Nothing found for &ldquo;{query}&rdquo;
+          </p>
+          <p className="text-sm mb-6">Try a different keyword, or browse by category below.</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setQuery(cat)}
+                className="category-chip cursor-pointer hover:bg-[var(--accent-color)] hover:text-white transition-all duration-200"
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      ) : (
+      )}
+
+      {/* ── Result list ──────────────────────────────────────── */}
+      {results.length > 0 && (
         <div className="flex flex-col divide-y divide-[var(--border-color)]">
           {results.map(post => (
             <Link
@@ -55,29 +98,22 @@ export default function SearchClient({ posts }: Props) {
               className="flex items-start justify-between gap-6 py-5 group"
             >
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-xs uppercase font-semibold tracking-[0.8px] text-[var(--accent-color)]">
-                    {post.category}
-                  </span>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="category-chip">{post.category}</span>
                   {post.tags.slice(0, 2).map(tag => (
-                    <span
-                      key={tag}
-                      className="text-[10px] uppercase tracking-wide text-[var(--text-secondary)] border border-[var(--border-color)] px-1.5 py-0.5 rounded"
-                    >
-                      {tag}
-                    </span>
+                    <span key={tag} className="tag-chip">{tag}</span>
                   ))}
                 </div>
-                <h2 className="font-serif text-lg leading-snug group-hover:text-[var(--accent-color)] transition-colors duration-200 truncate">
+                <h2 className="font-serif text-[1.1rem] leading-snug group-hover:text-[var(--accent-color)] transition-colors duration-200">
                   {post.title}
                 </h2>
-                <p className="text-sm text-[var(--text-secondary)] mt-1 leading-relaxed line-clamp-2">
+                <p className="text-sm text-[var(--text-secondary)] mt-1.5 leading-relaxed line-clamp-2">
                   {post.excerpt}
                 </p>
               </div>
               <div className="text-right shrink-0 pt-1">
-                <span className="text-xs text-[var(--text-secondary)] block">{post.readTime}</span>
-                <span className="text-xs text-[var(--text-secondary)] block mt-1">
+                <span className="text-xs text-[var(--text-secondary)] block tabular-nums">{post.readTime}</span>
+                <span className="text-xs text-[var(--text-secondary)] block mt-1 tabular-nums">
                   {new Date(post.publishedAt).toLocaleDateString('en-US', {
                     month: 'short',
                     year: 'numeric',
@@ -89,10 +125,27 @@ export default function SearchClient({ posts }: Props) {
         </div>
       )}
 
-      {!query && (
-        <p className="text-center text-xs text-[var(--text-secondary)] mt-8">
-          Showing all {posts.length} articles — start typing to filter
-        </p>
+      {/* ── Empty query browse state ─────────────────────────── */}
+      {!hasQuery && (
+        <div className="mt-2">
+          <p className="text-xs text-[var(--text-secondary)] mb-5">
+            Showing all {posts.length} articles &#8212; start typing to filter, or browse by category:
+          </p>
+          <div className="flex flex-wrap gap-2 mb-10">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setQuery(cat)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-200"
+              >
+                {cat}
+                <span className="text-[10px] opacity-50 tabular-nums">
+                  {posts.filter(p => p.category === cat).length}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   )
