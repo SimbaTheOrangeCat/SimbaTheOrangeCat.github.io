@@ -6,6 +6,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getPostBySlug, getPostSlugs, getAllPosts } from '@/lib/content/posts'
 import PostCard from '@/components/blog/PostCard'
 import ReadingProgress from '@/components/blog/ReadingProgress'
+import PostEngagement from '@/components/blog/PostEngagement'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -38,10 +39,13 @@ export default async function BlogPostPage({ params }: Props) {
   }
   const heroImage = post.coverImage ?? fallbackHeroBySlug[post.slug]
 
-  // Related posts: same category, excluding current
-  const related = getAllPosts()
-    .filter(p => p.slug !== slug && p.category === post.category)
-    .slice(0, 2)
+  // Suggested posts: prioritize same category, then fill from latest.
+  const allOtherPosts = getAllPosts().filter(p => p.slug !== slug)
+  const relatedByCategory = allOtherPosts.filter(p => p.category === post.category)
+  const relatedFallback = allOtherPosts.filter(
+    p => !relatedByCategory.some(r => r.slug === p.slug),
+  )
+  const related = [...relatedByCategory, ...relatedFallback].slice(0, 2)
 
   return (
     <>
@@ -128,6 +132,8 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="prose-content container-prose mb-20">
             <MDXRemote source={post.content} />
           </div>
+
+          <PostEngagement slug={post.slug} title={post.title} />
 
           {/* ── End-of-Article CTA ─────────────────────────── */}
           <div className="container-prose mb-20">

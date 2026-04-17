@@ -3,6 +3,7 @@ import { Inter, Lora } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import AuthProvider from '@/components/auth/AuthProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,12 +36,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${lora.variable} font-sans`}>
-        <div id="reading-progress-bar" />
-        <Header />
-        <main className="flex-1 py-14 page-fade-in">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <div id="reading-progress-bar" />
+          <Header />
+          <main className="flex-1 py-14 page-fade-in">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

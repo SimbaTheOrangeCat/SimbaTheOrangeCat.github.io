@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -16,6 +17,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
+  const { user, username, openAuthModal, signOut } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -70,6 +72,25 @@ export default function Header() {
             />
             Mindfactor.
           </Link>
+
+          <div className="ml-auto">
+            {user ? (
+              <button
+                onClick={() => void signOut()}
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+                title={username ?? 'Signed in'}
+              >
+                Sign out
+              </button>
+            ) : (
+              <button
+                onClick={() => openAuthModal('signin')}
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white transition-colors"
+              >
+                Sign in
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -159,6 +180,22 @@ export default function Header() {
             <span className="w-1.5 h-1.5 rounded-full bg-white/60 flex-shrink-0" aria-hidden="true" />
             My Journal
           </Link>
+
+          {user ? (
+            <button
+              onClick={() => void signOut()}
+              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+            >
+              Sign out {username ? `(${username})` : ''}
+            </button>
+          ) : (
+            <button
+              onClick={() => openAuthModal('signin')}
+              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+            >
+              Sign in
+            </button>
+          )}
         </nav>
 
         {/* Sidebar footer */}
