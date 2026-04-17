@@ -1,6 +1,15 @@
 'use client'
 
-import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import type { SupabaseClient, User } from '@supabase/supabase-js'
 import { getSupabasePublicConfig } from '@/lib/supabase/public-config'
@@ -36,6 +45,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [formConfirm, setFormConfirm] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const authBootstrappedRef = useRef(false)
 
   const client = useMemo(() => {
     const cfg = getSupabasePublicConfig()
@@ -43,30 +53,41 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     return createBrowserClient(cfg.url, cfg.anonKey)
   }, [])
 
-  async function hydrateProfile(nextUser: User | null) {
-    setUser(nextUser)
-    if (!nextUser) {
-      setUsername(null)
-      setIsAdmin(false)
-      return
-    }
+  const hydrateProfile = useCallback(
+    async (nextUser: User | null) => {
+      setUser(nextUser)
+      if (!nextUser) {
+        setUsername(null)
+        setIsAdmin(false)
+        return
+      }
 
-    const meta = nextUser.user_metadata ?? {}
-    const metaUsername = typeof meta.username === 'string' ? meta.username : null
-    const metaRole = typeof meta.role === 'string' ? meta.role : null
-    if (metaUsername) setUsername(metaUsername)
-    if (metaRole) setIsAdmin(metaRole === 'admin')
+      const meta = nextUser.user_metadata ?? {}
+      const metaUsername = typeof meta.username === 'string' ? meta.username : null
+      const metaRole = typeof meta.role === 'string' ? meta.role : null
+      if (metaUsername) setUsername(metaUsername)
+      if (metaRole) setIsAdmin(metaRole === 'admin')
 
-    if (!client) return
-    const { data } = await client
-      .from('profiles')
-      .select('username, role')
-      .eq('id', nextUser.id)
-      .maybeSingle()
+      if (!client) return
+      try {
+        const { data, error } = await client
+          .from('profiles')
+          .select('username, role')
+          .eq('id', nextUser.id)
+          .maybeSingle()
 
-    if (data?.username) setUsername(data.username)
-    if (data?.role) setIsAdmin(data.role === 'admin')
-  }
+        if (error) {
+          console.warn('[auth] profiles lookup failed', error.message)
+          return
+        }
+        if (data?.username) setUsername(data.username)
+        if (data?.role) setIsAdmin(data.role === 'admin')
+      } catch (e) {
+        console.warn('[auth] profiles lookup threw', e)
+      }
+    },
+    [client],
+  )
 
   useEffect(() => {
     if (!client) {
@@ -74,22 +95,62 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       return
     }
 
+    authBootstrappedRef.current = false
     let mounted = true
-    client.auth.getSession().then(async ({ data }) => {
+
+    const markReady = () => {
       if (!mounted) return
-      await hydrateProfile(data.session?.user ?? null)
+      if (authBootstrappedRef.current) return
+      authBootstrappedRef.current = true
       setLoading(false)
-    })
+    }
 
     const { data: listener } = client.auth.onAuthStateChange(async (_event, session) => {
-      await hydrateProfile(session?.user ?? null)
+      try {
+        await hydrateProfile(session?.user ?? null)
+      } catch (e) {
+        console.warn('[auth] onAuthStateChange hydrate failed', e)
+        if (mounted) {
+          setUser(null)
+          setUsername(null)
+          setIsAdmin(false)
+        }
+      } finally {
+        markReady()
+      }
     })
+
+    void client.auth
+      .getSession()
+      .then(async ({ data, error }) => {
+        if (!mounted) return
+        if (error) {
+          console.warn('[auth] getSession failed', error.message)
+          await hydrateProfile(null)
+          return
+        }
+        try {
+          await hydrateProfile(data.session?.user ?? null)
+        } catch (e) {
+          console.warn('[auth] getSession hydrate failed', e)
+          setUser(null)
+          setUsername(null)
+          setIsAdmin(false)
+        }
+      })
+      .catch(e => {
+        console.warn('[auth] getSession rejected', e)
+        if (mounted) void hydrateProfile(null)
+      })
+      .finally(() => {
+        markReady()
+      })
 
     return () => {
       mounted = false
       listener.subscription.unsubscribe()
     }
-  }, [client])
+  }, [client, hydrateProfile])
 
   const resetForm = () => {
     setFormUsername('')
@@ -110,8 +171,20 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signOut = async () => {
-    if (!client) return
-    await client.auth.signOut()
+    if (!client) {
+      setUser(null)
+      setUsername(null)
+      setIsAdmin(false)
+      return
+    }
+    try {
+      const { error } = await client.auth.signOut()
+      if (error) console.warn('[auth] signOut failed', error.message)
+    } catch (e) {
+      console.warn('[auth] signOut threw', e)
+    } finally {
+      await hydrateProfile(null)
+    }
   }
 
   const submit = async () => {

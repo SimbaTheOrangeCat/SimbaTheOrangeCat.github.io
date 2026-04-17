@@ -1,6 +1,7 @@
 'use client'
 
 import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useAuth } from '@/components/auth/AuthProvider'
 
 type Comment = {
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export default function PostEngagement({ slug, title }: Props) {
+  const pathname = usePathname()
   const [counts, setCounts] = useState<Record<string, number>>({})
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
@@ -32,29 +34,41 @@ export default function PostEngagement({ slug, title }: Props) {
   const [text, setText] = useState('')
   const [copied, setCopied] = useState(false)
   const [message, setMessage] = useState('')
-  const postPath = `/blog/${slug}`
+  const postPath = useMemo(() => {
+    const normalized = pathname?.replace(/\/+$/, '') ?? ''
+    if (normalized.includes('/blog/')) return normalized
+    return `/blog/${slug}`
+  }, [pathname, slug])
   const { client: supabase, user, username, isAdmin, openAuthModal } = useAuth()
 
   const loadComments = async () => {
     if (!supabase) return
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('comments')
       .select('id, user_id, author_name, content, created_at')
       .eq('post_path', postPath)
       .is('parent_id', null)
       .order('created_at', { ascending: false })
+    if (error) {
+      setMessage(`Comments could not load (${error.message}).`)
+      return
+    }
     setComments(data ?? [])
   }
 
   const loadReactions = async () => {
     if (!supabase) return
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('reactions')
       .select('user_id, emoji')
       .eq('post_path', postPath)
 
     const nextCounts: Record<string, number> = {}
     let nextSelected: string | null = null
+    if (error) {
+      setMessage(`Reactions could not load (${error.message}).`)
+      return
+    }
     for (const row of data ?? []) {
       nextCounts[row.emoji] = (nextCounts[row.emoji] ?? 0) + 1
       if (user && row.user_id === user.id) nextSelected = row.emoji
@@ -68,7 +82,7 @@ export default function PostEngagement({ slug, title }: Props) {
     void loadComments()
     void loadReactions()
     if (username) setName(username)
-  }, [supabase, user, username, slug])
+  }, [supabase, user, username, slug, postPath])
 
   const onReact = async (emoji: string) => {
     if (!supabase) {
@@ -101,7 +115,7 @@ export default function PostEngagement({ slug, title }: Props) {
     }
     if (!name.trim() || !text.trim()) return
 
-    await supabase.from('comments').insert({
+    const { error } = await supabase.from('comments').insert({
       user_id: user?.id ?? null,
       post_path: postPath,
       author_name: name.trim(),
@@ -109,6 +123,12 @@ export default function PostEngagement({ slug, title }: Props) {
       parent_id: null,
     })
 
+    if (error) {
+      setMessage(`Could not post comment (${error.message}).`)
+      return
+    }
+
+    setMessage('')
     await loadComments()
     setText('')
   }

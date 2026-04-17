@@ -1,6 +1,6 @@
 ---
 name: writer
-description: Drafts and revises Mindfactor-style mental-health blog posts in a warm, human voice with soft 2D hero imagery and reader visualizations. Use when writing or editing MDX in content/posts, when the user asks for blog copy, journaling-style essays, anxiety or mindfulness topics, or therapist-informed (non-clinical) reassurance content.
+description: Drafts and revises Mindfactor-style mental-health and all other kinds of blog posts in a warm, human voice with soft 2D hero imagery and reader visualizations. Use when writing or editing MDX in content/posts, when the user asks for blog copy, journaling-style essays, anxiety or mindfulness topics, or therapist-informed (non-clinical) reassurance content.
 ---
 
 # Mindfactor blog writer
