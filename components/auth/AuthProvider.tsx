@@ -3,6 +3,7 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import type { SupabaseClient, User } from '@supabase/supabase-js'
+import { getSupabasePublicConfig } from '@/lib/supabase/public-config'
 
 type AuthMode = 'signin' | 'signup'
 
@@ -37,10 +38,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [submitting, setSubmitting] = useState(false)
 
   const client = useMemo(() => {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    if (!url || !key) return null
-    return createBrowserClient(url, key)
+    const cfg = getSupabasePublicConfig()
+    if (!cfg) return null
+    return createBrowserClient(cfg.url, cfg.anonKey)
   }, [])
 
   async function hydrateProfile(nextUser: User | null) {
@@ -116,7 +116,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   const submit = async () => {
     if (!client) {
-      setError('Supabase is not configured yet.')
+      setError(
+        'Supabase URL or anon key is missing in this build. ' +
+          'Local: save .env.local in the project root (same folder as package.json), then stop the dev server (Ctrl+C) and run npm run dev again. ' +
+          'Live site: add GitHub Actions secrets NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY, then redeploy.',
+      )
       return
     }
     if (!formUsername.trim() || !formPassword.trim()) {
