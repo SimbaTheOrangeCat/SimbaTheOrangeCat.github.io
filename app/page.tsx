@@ -27,14 +27,14 @@ export default function HomePage() {
             <div className="flex items-center gap-3 flex-wrap">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-[8px] text-sm shadow-[0_2px_8px_rgba(5,150,105,0.25)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.35)] hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[var(--bg-color)] font-semibold rounded-lg text-sm shadow-[var(--shadow-accent)] hover:shadow-[0_8px_28px_rgba(192,160,106,0.42)] hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
               >
                 Read the Blog
                 <span aria-hidden="true">&#8594;</span>
               </Link>
               <Link
                 href="/search"
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--border-color)] hover:border-[var(--accent-color)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] font-medium rounded-[8px] text-sm transition-all duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--border-color)] hover:border-[var(--accent-color)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] font-medium rounded-lg text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
               >
                 Search Articles
               </Link>

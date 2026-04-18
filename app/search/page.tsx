@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getAllPosts } from '@/lib/content/posts'
 import SearchClient from '@/app/search/SearchClient'
 
@@ -20,7 +21,9 @@ export default function SearchPage() {
           Search across {posts.length} article{posts.length !== 1 ? 's' : ''}.
         </p>
       </div>
-      <SearchClient posts={posts} />
+      <Suspense fallback={<p className="text-sm text-[var(--text-secondary)]">Loading search&hellip;</p>}>
+        <SearchClient posts={posts} />
+      </Suspense>
     </div>
   )
 }

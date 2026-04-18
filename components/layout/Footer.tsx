@@ -8,7 +8,13 @@ const navLinks = [
   { href: '/journal', label: 'My Journal' },
 ]
 
-const topics = ['Mindfulness', 'Productivity', 'Simplicity', 'Slow Living']
+/** Display label → search query (matches categories, tags, or copy in posts). */
+const topicLinks = [
+  { label: 'Mindfulness', query: 'Mindfulness' },
+  { label: 'Productivity', query: 'Productivity' },
+  { label: 'Simplicity', query: 'minimalism' },
+  { label: 'Slow Living', query: 'slow living' },
+] as const
 
 export default function Footer() {
   return (
@@ -49,16 +55,17 @@ export default function Footer() {
               <p className="text-xs font-semibold uppercase tracking-[0.8px] text-[var(--text-secondary)] mb-3">
                 Topics
               </p>
-              <div className="flex flex-col gap-2">
-                {topics.map(topic => (
-                  <span
-                    key={topic}
-                    className="text-sm text-[var(--text-secondary)]"
+              <nav className="flex flex-col gap-0.5" aria-label="Browse by topic">
+                {topicLinks.map(({ label, query }) => (
+                  <Link
+                    key={label}
+                    href={`/search?q=${encodeURIComponent(query)}`}
+                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200 -mx-2 px-2 py-1.5 rounded-md hover:bg-[var(--border-subtle)]"
                   >
-                    {topic}
-                  </span>
+                    {label}
+                  </Link>
                 ))}
-              </div>
+              </nav>
             </div>
           </div>
         </div>

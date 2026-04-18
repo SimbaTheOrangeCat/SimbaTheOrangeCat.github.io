@@ -51,7 +51,7 @@ export default function Header() {
         <div className="relative flex w-full items-center justify-between h-[66px] pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-6 md:pr-6">
           {/* Hamburger — left */}
           <button
-            className="relative z-[1] flex w-9 h-9 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200"
+            className="relative z-[1] flex w-9 h-9 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
             onClick={() => setSidebarOpen(prev => !prev)}
             aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={sidebarOpen}
@@ -82,7 +82,7 @@ export default function Header() {
             {user ? (
               <button
                 onClick={() => void signOut()}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
                 title={username ?? 'Signed in'}
               >
                 Sign out
@@ -90,7 +90,7 @@ export default function Header() {
             ) : (
               <button
                 onClick={() => openAuthModal('signin')}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white transition-colors"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[var(--bg-color)] shadow-[var(--shadow-accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
               >
                 Sign in
               </button>
@@ -180,23 +180,23 @@ export default function Header() {
 
           <Link
             href="/journal"
-            className="flex items-center gap-2.5 text-sm font-semibold px-3 py-2.5 rounded-lg text-white bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] transition-colors duration-200 shadow-[0_1px_6px_rgba(5,150,105,0.22)]"
+            className="flex items-center gap-2.5 text-sm font-semibold px-3 py-2.5 rounded-lg text-[var(--bg-color)] bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] transition-colors duration-200 shadow-[var(--shadow-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-white/60 flex-shrink-0" aria-hidden="true" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--bg-color)]/35 flex-shrink-0" aria-hidden="true" />
             My Journal
           </Link>
 
           {user ? (
             <button
               onClick={() => void signOut()}
-              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
             >
               Sign out {username ? `(${username})` : ''}
             </button>
           ) : (
             <button
               onClick={() => openAuthModal('signin')}
-              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
             >
               Sign in
             </button>

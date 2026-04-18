@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import type { PostMeta } from '@/lib/content/posts'
 
 interface Props {
@@ -9,7 +10,13 @@ interface Props {
 }
 
 export default function SearchClient({ posts }: Props) {
+  const searchParams = useSearchParams()
   const [query, setQuery] = useState('')
+
+  useEffect(() => {
+    const q = searchParams.get('q')
+    setQuery(q ?? '')
+  }, [searchParams])
 
   const results = useMemo(() => {
     const q = query.toLowerCase().trim()
@@ -42,7 +49,7 @@ export default function SearchClient({ posts }: Props) {
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by title, category, or tag&#8230;"
-          className="w-full pl-11 pr-10 py-3.5 rounded-[10px] border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_rgba(5,150,105,0.12)] transition-all duration-200"
+          className="w-full pl-11 pr-10 py-3.5 rounded-[10px] border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_var(--accent-ring)] transition-all duration-200"
           autoFocus
         />
         {hasQuery && (
