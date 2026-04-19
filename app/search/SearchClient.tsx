@@ -55,7 +55,7 @@ export default function SearchClient({ posts }: Props) {
         {hasQuery && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-[var(--border-color)] hover:bg-[var(--text-secondary)] text-[var(--text-secondary)] hover:text-white transition-all duration-150 text-xs font-bold"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-[var(--border-color)] hover:bg-[var(--text-secondary)] text-[var(--text-secondary)] hover:text-[#f7f5f2] transition-all duration-150 text-xs font-bold"
             aria-label="Clear search"
           >
             &#215;
@@ -86,7 +86,7 @@ export default function SearchClient({ posts }: Props) {
               <button
                 key={cat}
                 onClick={() => setQuery(cat)}
-                className="category-chip cursor-pointer hover:bg-[var(--accent-color)] hover:text-white transition-all duration-200"
+                className="category-chip cursor-pointer hover:bg-[var(--accent-color)] hover:text-[#f7f5f2] transition-all duration-200"
               >
                 {cat}
               </button>

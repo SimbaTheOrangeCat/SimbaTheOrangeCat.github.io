@@ -19,11 +19,11 @@ theme: {
         'header-bg': 'var(--header-bg)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        serif: ['var(--font-lora)', 'Lora', 'serif'],
+        sans: ['var(--font-dm-sans)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       maxWidth: {
-        content: '1100px',
+        content: '1360px',
         prose: '720px',
       },
       transitionTimingFunction: {

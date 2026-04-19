@@ -103,7 +103,7 @@ export default function JournalClient() {
           </p>
           <button
             onClick={() => openAuthModal('signin')}
-            className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold"
+            className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold"
           >
             Sign in to continue
           </button>
@@ -149,7 +149,7 @@ export default function JournalClient() {
           />
           <div className="flex items-center justify-between gap-3">
             <p className="text-xs text-[var(--text-secondary)]">Mode: Supabase cloud</p>
-            <button type="submit" className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold">
+            <button type="submit" className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold">
               Save Entry
             </button>
           </div>

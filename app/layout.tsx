@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, Lora } from 'next/font/google'
+import { Inter, Lora, Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MainFrame from '@/components/layout/MainFrame'
 import AuthProvider from '@/components/auth/AuthProvider'
 
 const inter = Inter({
@@ -14,6 +15,18 @@ const inter = Inter({
 const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
+  display: 'swap',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
   display: 'swap',
 })
 
@@ -35,13 +48,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${lora.variable} font-sans`}>
+      <body
+        className={`${inter.variable} ${lora.variable} ${playfair.variable} ${dmSans.variable} font-sans`}
+      >
         <AuthProvider>
           <div id="reading-progress-bar" />
           <Header />
-          <main className="flex-1 py-14 page-fade-in">
-            {children}
-          </main>
+          <MainFrame>{children}</MainFrame>
           <Footer />
         </AuthProvider>
       </body>

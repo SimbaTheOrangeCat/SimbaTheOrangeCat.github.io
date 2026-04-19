@@ -25,11 +25,15 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => { setSidebarOpen(false) }, [pathname])
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [sidebarOpen])
 
   const isActive = (href: string) =>
@@ -39,32 +43,27 @@ export default function Header() {
     <>
       <header
         className={[
-          'sticky top-0 z-50 w-full border-b border-[var(--border-color)]',
-          'transition-[background-color,backdrop-filter,-webkit-backdrop-filter,box-shadow,border-color] duration-300',
-          // Frosted glass: blur content behind the bar (stronger while scrolling)
+          'sticky top-0 z-50 w-full border-b transition-[background-color,backdrop-filter,-webkit-backdrop-filter,box-shadow,border-color] duration-300',
           scrolled
-            ? 'bg-[rgba(8,12,35,0.62)] backdrop-blur-xl backdrop-saturate-150 [-webkit-backdrop-filter:blur(20px)] shadow-[0_8px_32px_rgba(0,0,0,0.35)] border-[var(--border-color)]/80'
-            : 'bg-[rgba(10,14,40,0.45)] backdrop-blur-md backdrop-saturate-125 [-webkit-backdrop-filter:blur(12px)]',
+            ? 'border-black/[0.12] bg-[rgba(247,245,242,0.94)] backdrop-blur-xl backdrop-saturate-150 [-webkit-backdrop-filter:blur(20px)] shadow-[0_10px_40px_rgba(0,0,0,0.06)]'
+            : 'border-black/[0.08] bg-[rgba(247,245,242,0.88)] backdrop-blur-md [-webkit-backdrop-filter:blur(14px)]',
         ].join(' ')}
       >
-        {/* Full-width row: menu flush left, logo centered in viewport, auth flush right */}
-        <div className="relative flex w-full items-center justify-between h-[66px] pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-6 md:pr-6">
-          {/* Hamburger — left */}
+        <div className="relative flex h-[66px] w-full items-center justify-between pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-6 md:pr-6">
           <button
-            className="relative z-[1] flex w-9 h-9 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
+            className="relative z-[1] flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md text-[#3d3a36] transition-colors duration-200 hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
             onClick={() => setSidebarOpen(prev => !prev)}
             aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={sidebarOpen}
           >
-            <span className="block w-[18px] h-0.5 bg-current" />
-            <span className="block w-[18px] h-0.5 bg-current" />
-            <span className="block w-[18px] h-0.5 bg-current" />
+            <span className="block h-0.5 w-[18px] bg-current" />
+            <span className="block h-0.5 w-[18px] bg-current" />
+            <span className="block h-0.5 w-[18px] bg-current" />
           </button>
 
-          {/* Logo — centered on viewport */}
           <Link
             href="/"
-            className="absolute left-1/2 top-1/2 z-[1] flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 font-serif text-[1.45rem] font-bold tracking-[-0.02em] text-[var(--text-primary)] hover:text-[var(--text-primary)] group pointer-events-auto"
+            className="pointer-events-auto absolute left-1/2 top-1/2 z-[1] flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 font-serif text-[1.45rem] font-bold tracking-[-0.02em] text-[#121212] hover:text-[#121212] group"
           >
             <Image
               src="/assets/logo-nav.svg"
@@ -77,12 +76,11 @@ export default function Header() {
             Mindfactor.
           </Link>
 
-          {/* Sign in / out — right */}
           <div className="relative z-[1] shrink-0">
             {user ? (
               <button
                 onClick={() => void signOut()}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
+                className="rounded-lg border border-[#c4bfb8] px-3 py-1.5 text-xs font-semibold text-[#3d3a36] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
                 title={username ?? 'Signed in'}
               >
                 Sign out
@@ -90,7 +88,7 @@ export default function Header() {
             ) : (
               <button
                 onClick={() => openAuthModal('signin')}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[var(--bg-color)] shadow-[var(--shadow-accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-color)]"
+                className="rounded-lg bg-[#121212] px-3 py-1.5 text-xs font-semibold text-[#f7f5f2] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-colors hover:bg-[#2a2826] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
               >
                 Sign in
               </button>
@@ -99,45 +97,30 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Backdrop */}
       <div
         className={[
-          'fixed inset-0 z-40 bg-black/25 backdrop-blur-[2px] transition-opacity duration-300',
-          sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+          'fixed inset-0 z-40 bg-black/[0.12] backdrop-blur-[2px] transition-opacity duration-300',
+          sidebarOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
         ].join(' ')}
         onClick={() => setSidebarOpen(false)}
         aria-hidden="true"
       />
 
-      {/* Sidebar */}
       <aside
         className={[
-          'fixed top-0 left-0 z-50 h-full w-64 bg-[var(--surface-color)] border-r border-[var(--border-color)]',
-          'flex flex-col transition-transform duration-300 ease-in-out',
-          'shadow-[6px_0_40px_rgba(0,0,0,0.07)]',
+          'fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r border-[#e5e2dc] bg-[#faf9f7] shadow-[6px_0_40px_rgba(0,0,0,0.07)] transition-transform duration-300 ease-in-out',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full',
         ].join(' ')}
         aria-label="Site navigation"
       >
-        {/* Sidebar header */}
-        <div className="flex items-center justify-between px-5 h-[66px] border-b border-[var(--border-color)] flex-shrink-0">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-serif text-[1.1rem] font-bold tracking-[-0.02em] text-[var(--text-primary)]"
-          >
-            <Image
-              src="/assets/logo-nav.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="rounded-[5px]"
-              aria-hidden
-            />
+        <div className="flex h-[66px] flex-shrink-0 items-center justify-between border-b border-[#e5e2dc] px-5">
+          <Link href="/" className="flex items-center gap-2 font-serif text-[1.1rem] font-bold tracking-[-0.02em] text-[#121212]">
+            <Image src="/assets/logo-nav.svg" alt="" width={20} height={20} className="rounded-[5px]" aria-hidden />
             Mindfactor.
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="w-7 h-7 flex items-center justify-center rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-color)] transition-colors duration-200"
+            className="flex h-7 w-7 items-center justify-center rounded-md text-[#6b6560] transition-colors duration-200 hover:bg-[#ebe8e2] hover:text-[#121212]"
             aria-label="Close menu"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -146,11 +129,8 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Nav */}
-        <nav className="flex-1 px-3 py-5 flex flex-col gap-0.5 overflow-y-auto">
-          <p className="text-[10px] font-semibold tracking-[0.1em] uppercase text-[var(--text-secondary)] px-3 mb-3">
-            Menu
-          </p>
+        <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-5">
+          <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#8a8782]">Menu</p>
           {navLinks.map(({ href, label }) => {
             const active = isActive(href)
             return (
@@ -158,16 +138,16 @@ export default function Header() {
                 key={href}
                 href={href}
                 className={[
-                  'flex items-center gap-2.5 text-sm font-medium px-3 py-2.5 rounded-lg transition-colors duration-200',
+                  'flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200',
                   active
-                    ? 'text-[var(--text-primary)] bg-[var(--border-color)]'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-color)]',
+                    ? 'bg-[#ebe8e2] text-[#121212]'
+                    : 'text-[#5c5854] hover:bg-[#ebe8e2] hover:text-[#121212]',
                 ].join(' ')}
               >
                 <span
                   className={[
-                    'w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors duration-200',
-                    active ? 'bg-[var(--accent-color)]' : 'bg-[var(--border-color)]',
+                    'h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors duration-200',
+                    active ? 'bg-[#8a2419]' : 'bg-[#d4d0c8]',
                   ].join(' ')}
                   aria-hidden="true"
                 />
@@ -176,36 +156,35 @@ export default function Header() {
             )
           })}
 
-          <div className="my-3 border-t border-[var(--border-color)]" />
+          <div className="my-3 border-t border-[#e5e2dc]" />
 
           <Link
             href="/journal"
-            className="flex items-center gap-2.5 text-sm font-semibold px-3 py-2.5 rounded-lg text-[var(--bg-color)] bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] transition-colors duration-200 shadow-[var(--shadow-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
+            className="flex items-center gap-2.5 rounded-lg bg-[#121212] px-3 py-2.5 text-sm font-semibold text-[#f7f5f2] shadow-[0_4px_14px_rgba(0,0,0,0.1)] transition-colors hover:bg-[#2a2826] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--bg-color)]/35 flex-shrink-0" aria-hidden="true" />
+            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#f7f5f2]/35" aria-hidden="true" />
             My Journal
           </Link>
 
           {user ? (
             <button
               onClick={() => void signOut()}
-              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
+              className="mt-2 w-full rounded-lg border border-[#e5e2dc] px-3 py-2.5 text-left text-sm text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
             >
               Sign out {username ? `(${username})` : ''}
             </button>
           ) : (
             <button
               onClick={() => openAuthModal('signin')}
-              className="mt-2 w-full text-left px-3 py-2.5 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-color)]"
+              className="mt-2 w-full rounded-lg border border-[#e5e2dc] px-3 py-2.5 text-left text-sm text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
             >
               Sign in
             </button>
           )}
         </nav>
 
-        {/* Sidebar footer */}
-        <div className="px-5 py-4 border-t border-[var(--border-color)] flex-shrink-0">
-          <p className="text-xs text-[var(--text-secondary)]">Mindful living · clarity · focus</p>
+        <div className="flex-shrink-0 border-t border-[#e5e2dc] px-5 py-4">
+          <p className="text-xs text-[#8a8782]">Mindful living · clarity · focus</p>
         </div>
       </aside>
     </>

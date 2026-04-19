@@ -168,14 +168,14 @@ export default function PostEngagement({ slug, title }: Props) {
                 className={[
                   'inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-200',
                   active
-                    ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]'
+                    ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)]',
                 ].join(' ')}
               >
                 <span>{r.emoji}</span>
                 <span>{r.label}</span>
                 {count > 0 && (
-                  <span className={active ? 'text-white/80' : 'text-[var(--text-secondary)]'}>
+                  <span className={active ? 'text-[#f7f5f2]/80' : 'text-[var(--text-secondary)]'}>
                     {count}
                   </span>
                 )}
@@ -218,7 +218,7 @@ export default function PostEngagement({ slug, title }: Props) {
             />
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold"
+              className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold"
             >
               Post Comment
             </button>

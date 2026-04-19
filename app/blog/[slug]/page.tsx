@@ -154,7 +154,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="flex items-center justify-center gap-3 flex-wrap">
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold rounded-[8px] transition-all duration-200 shadow-[var(--shadow-accent)] hover:shadow-[0_4px_20px_rgba(5,150,105,0.35)] hover:-translate-y-px"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold rounded-[8px] transition-all duration-200 shadow-[var(--shadow-accent)] hover:shadow-[0_4px_20px_rgba(138,36,25,0.35)] hover:-translate-y-px"
                 >
                   <span aria-hidden="true">&#8592;</span> Back to Blog
                 </Link>

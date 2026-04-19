@@ -279,7 +279,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
                 className={[
                   'px-3 py-1.5 text-sm rounded-lg border',
                   mode === 'signin'
-                    ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]'
+                    ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)]',
                 ].join(' ')}
               >
@@ -290,7 +290,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
                 className={[
                   'px-3 py-1.5 text-sm rounded-lg border',
                   mode === 'signup'
-                    ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]'
+                    ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)]',
                 ].join(' ')}
               >
@@ -325,7 +325,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold disabled:opacity-60"
+                className="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold disabled:opacity-60"
               >
                 {submitting ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Create account'}
               </button>
