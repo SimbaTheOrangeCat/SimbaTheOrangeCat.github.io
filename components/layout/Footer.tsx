@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import NewsletterSignupForm from '@/components/layout/NewsletterSignupForm'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -59,6 +60,17 @@ export default function Footer() {
                 ))}
               </nav>
             </div>
+          </div>
+        </div>
+
+        <div className="border-b border-[#dad6cf] py-8">
+          <div className="mx-auto max-w-[560px] text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.8px] text-[#8a8782]">Newsletter</p>
+            <h3 className="mt-2 font-serif text-[1.35rem] text-[#121212]">Subscribe for gentle weekly notes</h3>
+            <p className="mt-2 text-sm text-[#5c5854]">
+              Get calm insights and mindful reflections in your inbox.
+            </p>
+            <NewsletterSignupForm />
           </div>
         </div>
 
