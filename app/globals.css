@@ -310,6 +310,150 @@
   opacity: 1;
 }
 
+/* ─── Blog page engagement motion ─────────────────────────────────── */
+@keyframes blogCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.blog-card-reveal {
+  opacity: 0;
+  animation: blogCardReveal 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pillPulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.blog-filter-pill-active {
+  animation: pillPulse 0.28s ease-out;
+}
+
+/* Inline post media used inside MDX for visual rhythm */
+.prose-content .post-inline-figure {
+  margin: 2.3rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.prose-content .post-inline-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: floatHero 7.5s ease-in-out infinite;
+}
+
+.prose-content .post-inline-figure-animated img {
+  animation: floatHero 6.2s ease-in-out infinite;
+}
+
+/* Live animated block embedded in slow-mornings post */
+.prose-content .slow-morning-live-scene {
+  position: relative;
+  height: 180px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: linear-gradient(180deg, #f8eee2 0%, #ecd7bf 100%);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.prose-content .slow-morning-live-scene .dawn-sun {
+  position: absolute;
+  top: 18px;
+  right: 26px;
+  width: 78px;
+  height: 78px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #ffe6c4 0%, #ffc98d 58%, #f3a862 100%);
+  animation: dawnPulse 6s ease-in-out infinite;
+}
+
+.prose-content .slow-morning-live-scene .calm-blanket {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 32px;
+  height: 72px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e8bf92 0%, #e0b282 45%, #d39c6c 100%);
+  animation: blanketBreath 4.8s ease-in-out infinite;
+}
+
+.prose-content .slow-morning-live-scene .coffee-cup {
+  position: absolute;
+  left: 18%;
+  bottom: 24px;
+  width: 32px;
+  height: 24px;
+  border-radius: 0 0 8px 8px;
+  background: #fff7ed;
+  border: 2px solid #d7b58f;
+}
+
+.prose-content .slow-morning-live-scene .coffee-cup::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 4px;
+  width: 8px;
+  height: 11px;
+  border: 2px solid #d7b58f;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.prose-content .slow-morning-live-scene .steam {
+  position: absolute;
+  left: 19.5%;
+  bottom: 48px;
+  width: 3px;
+  height: 24px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7));
+  border-radius: 999px;
+}
+
+.prose-content .slow-morning-live-scene .steam-one {
+  animation: steamUp 2.2s ease-in-out infinite;
+}
+
+.prose-content .slow-morning-live-scene .steam-two {
+  left: 21%;
+  animation: steamUp 2.5s ease-in-out 0.5s infinite;
+}
+
+@keyframes dawnPulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes blanketBreath {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes steamUp {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  35% { opacity: 0.6; }
+  100% {
+    transform: translateY(-24px) translateX(6px);
+    opacity: 0;
+  }
+}
+
 /* ─── Section Title ────────────────────────────────────────────────── */
 .section-heading {
   font-family: var(--font-playfair), Georgia, serif;
@@ -452,6 +596,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .blog-card-reveal,
+  .blog-filter-pill-active,
+  .prose-content .post-inline-figure img,
+  .prose-content .slow-morning-live-scene .dawn-sun,
+  .prose-content .slow-morning-live-scene .calm-blanket,
+  .prose-content .slow-morning-live-scene .steam {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
   .he-scroll-reveal {
     opacity: 1;
     transform: none;

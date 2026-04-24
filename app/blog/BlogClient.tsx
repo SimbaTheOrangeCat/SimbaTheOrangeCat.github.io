@@ -44,9 +44,9 @@ export default function BlogClient({ posts }: Props) {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={[
-                  'inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200',
+                  'inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200 motion-safe:hover:-translate-y-px',
                   active
-                    ? 'bg-[var(--accent-color)] border-[var(--accent-color)] text-[#f7f5f2] shadow-[0_2px_12px_rgba(138,36,25,0.25)]'
+                    ? 'bg-[var(--accent-color)] border-[var(--accent-color)] text-[#f7f5f2] shadow-[0_2px_12px_rgba(138,36,25,0.25)] blog-filter-pill-active'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)] bg-transparent hover:border-[var(--accent-color)] hover:text-[var(--accent-color)]',
                 ].join(' ')}
               >
@@ -62,9 +62,15 @@ export default function BlogClient({ posts }: Props) {
 
       {/* ── Post Grid ────────────────────────────────────────── */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-16">
-          {filtered.map(post => (
-            <PostCard key={post.slug} post={post} />
+        <div key={activeCategory} className="blog-list-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-16">
+          {filtered.map((post, index) => (
+            <div
+              key={post.slug}
+              className="blog-card-reveal"
+              style={{ animationDelay: `${Math.min(index * 70, 420)}ms` }}
+            >
+              <PostCard post={post} />
+            </div>
           ))}
         </div>
       ) : (
