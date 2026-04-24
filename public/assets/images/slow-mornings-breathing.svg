@@ -1,0 +1,73 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg_grad" x1="600" y1="0" x2="600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDFBF9"/>
+      <stop offset="1" stop-color="#F5F0EB"/>
+    </linearGradient>
+    <filter id="soft_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bg_grad)"/>
+
+  <!-- Breathing Rings (Expanding Outward) -->
+  <circle cx="600" cy="450" r="100" stroke="#EEC79D" stroke-width="2" opacity="0">
+    <animate attributeName="r" values="100;450" dur="8s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0;0.4;0" dur="8s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="600" cy="450" r="100" stroke="#D8C1A7" stroke-width="1.5" opacity="0">
+    <animate attributeName="r" values="100;450" dur="8s" begin="4s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0;0.3;0" dur="8s" begin="4s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Minimal Person Illustration -->
+  <g transform="translate(300, 300)">
+    <!-- Body Base -->
+    <path d="M150 400C250 380 350 380 450 400V500H150V400Z" fill="#E8D6BF" opacity="0.6"/>
+    
+    <!-- Chest / Umbrella Shape -->
+    <g transform="translate(300, 420)">
+      <path id="umbrella" d="M-80 0C-80 -40 80 -40 80 0H-80Z" fill="#EEC79D" opacity="0.5">
+        <animateTransform 
+          attributeName="transform" 
+          type="scale" 
+          values="1 1; 1.15 1.25; 1 1" 
+          dur="8s" 
+          repeatCount="indefinite" 
+          additive="sum"
+        />
+      </path>
+    </g>
+
+    <!-- Hands -->
+    <ellipse cx="300" cy="420" rx="45" ry="30" fill="#F4E8D9">
+       <animate attributeName="translateY" values="0;-8;0" dur="8s" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse cx="300" cy="490" rx="50" ry="35" fill="#F4E8D9" />
+  </g>
+
+  <!-- Sound Wave Visual in Corner -->
+  <g transform="translate(1000, 800)">
+    <rect x="0" y="-20" width="4" height="40" fill="#D3B89A">
+      <animate attributeName="height" values="20;60;20" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="y" values="-10;-30;-10" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <rect x="12" y="-10" width="4" height="20" fill="#D3B89A">
+      <animate attributeName="height" values="10;40;10" dur="2.5s" repeatCount="indefinite" />
+      <animate attributeName="y" values="-5;-20;-5" dur="2.5s" repeatCount="indefinite" />
+    </rect>
+    <rect x="24" y="-15" width="4" height="30" fill="#D3B89A">
+      <animate attributeName="height" values="15;50;15" dur="3.5s" repeatCount="indefinite" />
+      <animate attributeName="y" values="-7.5;-25;-7.5" dur="3.5s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Text Indicator -->
+  <text x="600" y="800" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#5c5854" opacity="0.7">
+    <tspan x="600" dy="0">Inhale...</tspan>
+    <animate attributeName="opacity" values="0;0.7;0;0.7;0" dur="16s" repeatCount="indefinite" />
+  </text>
+</svg>

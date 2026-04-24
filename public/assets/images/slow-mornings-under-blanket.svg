@@ -1,34 +1,62 @@
 <svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="wall" x1="600" y1="0" x2="600" y2="760" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F7F0E8"/>
-      <stop offset="1" stop-color="#ECDAC4"/>
+    <linearGradient id="wall_grad" x1="600" y1="0" x2="600" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDFBF9"/>
+      <stop offset="1" stop-color="#F5F0EB"/>
     </linearGradient>
-    <linearGradient id="blanket" x1="530" y1="350" x2="760" y2="650" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EEC79D"/>
-      <stop offset="1" stop-color="#DAA974"/>
+    <linearGradient id="blanket_grad" x1="530" y1="350" x2="760" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAD7C3"/>
+      <stop offset="1" stop-color="#D8C1A7"/>
     </linearGradient>
+    <filter id="light_glow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+    </filter>
   </defs>
 
-  <rect width="1200" height="760" fill="url(#wall)"/>
-  <rect x="780" y="92" width="250" height="370" rx="18" fill="#FFFAF5"/>
-  <ellipse cx="915" cy="160" rx="180" ry="120" fill="#FFD5A4" opacity="0.28">
-    <animate attributeName="opacity" values="0.22;0.36;0.22" dur="6.6s" repeatCount="indefinite"/>
-  </ellipse>
+  <!-- Background Wall -->
+  <rect width="1200" height="760" fill="url(#wall_grad)"/>
 
-  <rect x="140" y="520" width="920" height="150" rx="20" fill="#D3B89A"/>
-  <rect x="210" y="420" width="780" height="130" rx="65" fill="#E8D6BF"/>
+  <!-- Animation 1: Soft Morning Light Leaking In -->
+  <rect x="800" y="50" width="10" height="500" fill="#FFECB3" opacity="0.4" filter="url(#light_glow)">
+    <animate attributeName="width" values="10;120;10" dur="15s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="15s" repeatCount="indefinite" />
+  </rect>
 
-  <path d="M250 485C340 435 470 410 610 414C760 420 882 447 970 512V640H250V485Z" fill="url(#blanket)">
-    <animate attributeName="d" dur="5.4s" repeatCount="indefinite"
+  <!-- Bed Structure -->
+  <rect x="140" y="520" width="920" height="150" rx="20" fill="#C9AE91"/>
+  
+  <!-- Animation 2: Hand Resting on Blanket (Breathing Motion) -->
+  <path d="M250 485C340 435 470 410 610 414C760 420 882 447 970 512V640H250V485Z" fill="url(#blanket_grad)">
+    <animate attributeName="d" dur="8s" repeatCount="indefinite"
       values="M250 485C340 435 470 410 610 414C760 420 882 447 970 512V640H250V485Z;
-              M250 493C342 443 472 419 610 423C758 429 880 456 970 520V640H250V493Z;
+              M250 490C342 440 472 415 610 419C758 425 880 452 970 518V640H250V490Z;
               M250 485C340 435 470 410 610 414C760 420 882 447 970 512V640H250V485Z"/>
   </path>
 
-  <ellipse cx="610" cy="444" rx="76" ry="58" fill="#EFB889"/>
-  <circle cx="580" cy="438" r="6.5" fill="#73452E"/>
-  <circle cx="639" cy="438" r="6.5" fill="#73452E"/>
-  <path d="M588 470C603 484 624 484 639 470" stroke="#945338" stroke-width="4" stroke-linecap="round"/>
-  <path d="M545 428C558 392 584 370 613 370C643 370 669 392 680 427" stroke="#C78152" stroke-width="14" stroke-linecap="round"/>
+  <!-- Hand (Still, grounded) -->
+  <g transform="translate(550, 420)">
+    <path d="M0 20C0 10 10 0 20 0H60C70 0 80 10 80 20V30C80 40 70 50 60 50H20C10 50 0 40 0 30V20Z" fill="#F4E8D9">
+      <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        values="0 0; 0 5; 0 0" 
+        dur="8s" 
+        repeatCount="indefinite" 
+        additive="sum"
+      />
+    </path>
+  </g>
+
+  <!-- Side Table & Phone (Faintly buzzing) -->
+  <rect x="1000" y="400" width="120" height="200" rx="10" fill="#E8D6BF"/>
+  <rect x="1020" y="380" width="40" height="70" rx="4" fill="#3D3A37">
+    <animateTransform 
+      attributeName="transform" 
+      type="translate" 
+      values="0 0; 1 0; -1 0; 0 0" 
+      dur="0.1s" 
+      repeatCount="10" 
+      begin="5s; 15s; 25s" 
+    />
+  </rect>
 </svg>
