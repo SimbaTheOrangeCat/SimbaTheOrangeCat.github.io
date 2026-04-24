@@ -1,0 +1,14 @@
+PGM
+             DCL VAR(&LIB) TYPE(*CHAR) LEN(10) VALUE('YOURLIB')
+             DCL VAR(&USR) TYPE(*CHAR) LEN(10) VALUE('NEWSBRGUSR')
+
+             CHGVAR VAR(&LIB) VALUE(%SST(&LIB 1 10))
+             CHGVAR VAR(&USR) VALUE(%SST(&USR 1 10))
+
+             /* Ensure service profile exists (create manually if missing). */
+             /* Example authority assignment for newsletter table. */
+             GRTOBJAUT OBJ(&LIB/NEWSLETTER_SUBS) OBJTYPE(*FILE) USER(&USR) +
+                          AUT(*USE)
+
+             SNDPGMMSG MSG('Newsletter table authority granted.')
+ENDPGM
