@@ -166,13 +166,12 @@ export default function PostEngagement({ slug, title }: Props) {
                 key={r.emoji}
                 onClick={() => onReact(r.emoji)}
                 className={[
-                  'inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-200',
+                  'inline-flex items-center gap-2 rounded-none border px-3 py-2 text-[13px] uppercase tracking-wide font-medium transition-all duration-200',
                   active
                     ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)]',
                 ].join(' ')}
               >
-                <span>{r.emoji}</span>
                 <span>{r.label}</span>
                 {count > 0 && (
                   <span className={active ? 'text-[#f7f5f2]/80' : 'text-[var(--text-secondary)]'}>
@@ -187,7 +186,7 @@ export default function PostEngagement({ slug, title }: Props) {
         <div className="flex flex-wrap gap-2 mb-8">
           <button
             onClick={onShare}
-            className="px-4 py-2 rounded-lg border border-[var(--border-color)] text-sm hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
+            className="rounded-none border border-[var(--border-color)] px-4 py-2 text-[11px] font-bold uppercase tracking-widest hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors"
           >
             Share this post
           </button>
@@ -205,7 +204,7 @@ export default function PostEngagement({ slug, title }: Props) {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Your name"
-              className="w-full rounded-lg border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
+              className="w-full rounded-none border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
               maxLength={80}
               readOnly={!!user}
             />
@@ -213,12 +212,12 @@ export default function PostEngagement({ slug, title }: Props) {
               value={text}
               onChange={e => setText(e.target.value)}
               placeholder="Write your thoughts..."
-              className="w-full min-h-[110px] rounded-lg border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
+              className="w-full min-h-[110px] rounded-none border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
               maxLength={1000}
             />
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold"
+              className="rounded-none bg-[var(--accent-color)] px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[#f7f5f2] hover:bg-[var(--accent-hover)]"
             >
               Post Comment
             </button>
@@ -244,7 +243,7 @@ export default function PostEngagement({ slug, title }: Props) {
                   {isAdmin && (
                     <button
                       onClick={() => void onDeleteComment(c.id)}
-                      className="mt-2 text-xs px-2 py-1 rounded border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-red-400 hover:border-red-400"
+                      className="mt-2 rounded-none border border-[var(--border-color)] px-2 py-1 text-xs uppercase tracking-wide text-[var(--text-secondary)] hover:border-red-400 hover:text-red-400"
                     >
                       Delete comment
                     </button>

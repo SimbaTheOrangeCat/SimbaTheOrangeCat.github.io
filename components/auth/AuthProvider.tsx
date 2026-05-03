@@ -272,12 +272,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
             aria-label="Close auth dialog"
             onClick={closeAuthModal}
           />
-          <div className="relative w-full max-w-md rounded-2xl border border-[var(--border-color)] bg-[var(--surface-color)] p-6">
+          <div className="relative w-full max-w-md rounded-none border border-[var(--border-color)] bg-[var(--surface-color)] p-6">
             <div className="flex items-center gap-2 mb-5">
               <button
                 onClick={() => setMode('signin')}
                 className={[
-                  'px-3 py-1.5 text-sm rounded-lg border',
+                  'px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-none border',
                   mode === 'signin'
                     ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)]',
@@ -288,7 +288,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
               <button
                 onClick={() => setMode('signup')}
                 className={[
-                  'px-3 py-1.5 text-sm rounded-lg border',
+                  'px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-none border',
                   mode === 'signup'
                     ? 'bg-[var(--accent-color)] text-[#f7f5f2] border-[var(--accent-color)]'
                     : 'border-[var(--border-color)] text-[var(--text-secondary)]',
@@ -303,14 +303,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
                 value={formUsername}
                 onChange={e => setFormUsername(e.target.value)}
                 placeholder="Username"
-                className="w-full rounded-lg border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
+                className="w-full rounded-none border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
               />
               <input
                 value={formPassword}
                 onChange={e => setFormPassword(e.target.value)}
                 type="password"
                 placeholder="Password"
-                className="w-full rounded-lg border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
+                className="w-full rounded-none border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
               />
               {mode === 'signup' && (
                 <input
@@ -318,14 +318,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
                   onChange={e => setFormConfirm(e.target.value)}
                   type="password"
                   placeholder="Confirm password"
-                  className="w-full rounded-lg border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
+                  className="w-full rounded-none border border-[var(--border-color)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--accent-color)]"
                 />
               )}
               {error && <p className="text-sm text-red-400">{error}</p>}
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-sm font-semibold disabled:opacity-60"
+                className="w-full px-4 py-2 rounded-none bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-[#f7f5f2] text-[11px] font-bold uppercase tracking-widest disabled:opacity-60"
               >
                 {submitting ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Create account'}
               </button>

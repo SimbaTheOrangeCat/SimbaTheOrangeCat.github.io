@@ -80,7 +80,7 @@ export default function Header() {
             {user ? (
               <button
                 onClick={() => void signOut()}
-                className="rounded-lg border border-[#c4bfb8] px-3 py-1.5 text-xs font-semibold text-[#3d3a36] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+                className="rounded-none border border-[#c4bfb8] px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#3d3a36] transition-colors hover:border-[#121212] hover:text-[#121212] hover:bg-[#121212]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
                 title={username ?? 'Signed in'}
               >
                 Sign out
@@ -88,7 +88,7 @@ export default function Header() {
             ) : (
               <button
                 onClick={() => openAuthModal('signin')}
-                className="rounded-lg bg-[#121212] px-3 py-1.5 text-xs font-semibold text-[#f7f5f2] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-colors hover:bg-[#2a2826] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+                className="rounded-none bg-[#121212] px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#f7f5f2] shadow-sm transition-colors hover:bg-[#2a2826] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
               >
                 Sign in
               </button>
@@ -169,14 +169,14 @@ export default function Header() {
           {user ? (
             <button
               onClick={() => void signOut()}
-              className="mt-2 w-full rounded-lg border border-[#e5e2dc] px-3 py-2.5 text-left text-sm text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
+              className="mt-2 w-full rounded-none border border-[#e5e2dc] px-3 py-2.5 text-left text-[11px] font-bold uppercase tracking-widest text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
             >
               Sign out {username ? `(${username})` : ''}
             </button>
           ) : (
             <button
               onClick={() => openAuthModal('signin')}
-              className="mt-2 w-full rounded-lg border border-[#e5e2dc] px-3 py-2.5 text-left text-sm text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
+              className="mt-2 w-full rounded-none border border-[#e5e2dc] px-3 py-2.5 text-left text-[11px] font-bold uppercase tracking-widest text-[#5c5854] transition-colors hover:border-[#121212] hover:text-[#121212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f7]"
             >
               Sign in
             </button>

@@ -76,7 +76,7 @@ export default function NewsletterSignupForm() {
   }
 
   return (
-    <form className="mt-5 flex flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
+    <form className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap" onSubmit={handleSubmit}>
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
       </label>
@@ -89,16 +89,16 @@ export default function NewsletterSignupForm() {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
         disabled={disabled}
-        className="h-11 w-full rounded-full border border-[#d7d2ca] bg-[#f4f1ec] px-4 text-sm text-[#2f2c28] outline-none transition-colors duration-200 placeholder:text-[#9a958d] focus:border-[#8a2419] disabled:cursor-not-allowed disabled:opacity-70"
+        className="h-11 w-full sm:w-64 max-w-full rounded-none border border-[#d7d2ca] bg-[#f4f1ec] px-4 text-sm text-[#2f2c28] outline-none transition-colors duration-200 placeholder:text-[#9a958d] focus:border-[#8a2419] disabled:cursor-not-allowed disabled:opacity-70"
       />
       <button
         type="submit"
         disabled={disabled}
-        className="h-11 rounded-full bg-[#8a2419] px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#6f1d14] disabled:cursor-not-allowed disabled:opacity-70"
+        className="h-11 rounded-none bg-[#8a2419] px-6 text-[11px] font-bold uppercase tracking-widest text-[#f7f5f2] shadow-sm transition-colors duration-200 hover:bg-[#6f1d14] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {submitState === 'loading' ? 'Subscribing...' : 'Subscribe'}
       </button>
-      <p className={`sm:basis-full sm:pt-1 text-xs ${feedbackToneClass}`} aria-live="polite">
+      <p className={`w-full text-center text-xs ${feedbackToneClass}`} aria-live="polite">
         {message}
       </p>
     </form>

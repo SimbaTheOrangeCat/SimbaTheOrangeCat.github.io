@@ -62,3 +62,14 @@ export async function upsertNewsletterSubscription(email, source) {
   const isNew = Math.abs(createdAt - updatedAt) < 2000
   return isNew ? 'subscribed' : 'already_subscribed'
 }
+
+export async function getActiveSubscribers() {
+  const connection = await getConnection()
+  const { schema, table } = getSchemaAndTable()
+
+  const result = await connection.query(
+    `SELECT EMAIL FROM ${schema}.${table} WHERE STATUS = 'A'`
+  )
+
+  return result.map((row) => row.EMAIL)
+}

@@ -2,7 +2,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import rateLimit from 'express-rate-limit'
-import { upsertNewsletterSubscription } from './db2.js'
+import nodemailer from 'nodemailer'
+import { upsertNewsletterSubscription, getActiveSubscribers } from './db2.js'
 import { isValidEmail, normalizeEmail } from './validation.js'
 
 dotenv.config()
@@ -54,6 +55,54 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
       sqlState: error?.odbcErrors?.[0]?.state,
     })
     return res.status(503).json({ ok: false, error: 'temporary_unavailable' })
+  }
+})
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+})
+
+app.post('/api/newsletter/notify', async (req, res) => {
+  const secret = req.body?.secret
+  const blogTitle = req.body?.blogTitle
+  const blogUrl = req.body?.blogUrl
+
+  if (!process.env.NOTIFY_SECRET || secret !== process.env.NOTIFY_SECRET) {
+    return res.status(401).json({ ok: false, error: 'unauthorized' })
+  }
+
+  if (!blogTitle) {
+    return res.status(400).json({ ok: false, error: 'missing_title' })
+  }
+
+  try {
+    const emails = await getActiveSubscribers()
+    if (!emails || emails.length === 0) {
+      return res.status(200).json({ ok: true, message: 'No active subscribers found' })
+    }
+
+    const subject = `A new blog post for you - ${blogTitle}`
+    const text = `Hi,\n\nI just posted a new blog: "${blogTitle}".\n\n${
+      blogUrl ? `You can read it on the site: ${blogUrl}\n\n` : ''
+    }Stay mindful.`
+
+    await transporter.sendMail({
+      from: `"Mindfactor Blog" <${process.env.SMTP_USER}>`,
+      bcc: emails.join(', '),
+      subject,
+      text,
+    })
+
+    return res.status(200).json({ ok: true, count: emails.length })
+  } catch (error) {
+    console.error('newsletter notify failed', error)
+    return res.status(500).json({ ok: false, error: 'internal_error' })
   }
 })
 

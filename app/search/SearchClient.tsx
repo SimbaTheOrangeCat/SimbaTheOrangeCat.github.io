@@ -49,13 +49,13 @@ export default function SearchClient({ posts }: Props) {
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by title, category, or tag&#8230;"
-          className="w-full pl-11 pr-10 py-3.5 rounded-[10px] border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_var(--accent-ring)] transition-all duration-200"
+          className="w-full pl-11 pr-10 py-3.5 rounded-none border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] text-sm focus:outline-none focus:border-[var(--accent-color)] focus:shadow-[0_0_0_3px_var(--accent-ring)] transition-all duration-200"
           autoFocus
         />
         {hasQuery && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-[var(--border-color)] hover:bg-[var(--text-secondary)] text-[var(--text-secondary)] hover:text-[#f7f5f2] transition-all duration-150 text-xs font-bold"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-none bg-[var(--border-color)] hover:bg-[var(--text-secondary)] text-[var(--text-secondary)] hover:text-[#f7f5f2] transition-all duration-150 text-xs font-bold"
             aria-label="Clear search"
           >
             &#215;
@@ -143,7 +143,7 @@ export default function SearchClient({ posts }: Props) {
               <button
                 key={cat}
                 onClick={() => setQuery(cat)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-200"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-none border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-200"
               >
                 {cat}
                 <span className="text-[10px] opacity-50 tabular-nums">

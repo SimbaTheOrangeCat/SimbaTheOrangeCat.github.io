@@ -130,8 +130,7 @@ function FeedCard({ post, variant }: { post: PostMeta; variant: 'feature' | 'com
 
 export default function HomePage() {
   const allPosts = getAllPosts()
-  const featured = getFeaturedPosts()
-  const heroPost = featured[0] ?? allPosts[0] ?? null
+  const heroPost = allPosts[0] ?? null
   const rest = heroPost ? allPosts.filter(p => p.slug !== heroPost.slug) : allPosts
   const rail = categoryRail([...new Set(allPosts.map(p => p.category))])
 
