@@ -15,7 +15,10 @@
       "Bash(ls node_modules/.bin/next*)",
       "Bash(node_modules/.bin/next --version)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "mcp__claude_ai_Canva__generate-design",
+      "mcp__claude_ai_Canva__create-design-from-candidate",
+      "mcp__claude_ai_Canva__export-design"
     ]
   }
 }
