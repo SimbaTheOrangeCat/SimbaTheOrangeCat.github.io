@@ -18,7 +18,9 @@
       "Bash(git commit -m ' *)",
       "mcp__claude_ai_Canva__generate-design",
       "mcp__claude_ai_Canva__create-design-from-candidate",
-      "mcp__claude_ai_Canva__export-design"
+      "mcp__claude_ai_Canva__export-design",
+      "Bash(curl -L \"https://export-download.canva.com/cRWz8/DAHJVpcRWz8/-1/0/0001-7089168659707571120.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260510%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260510T154039Z&X-Amz-Expires=59036&X-Amz-Signature=4155f761c0d9d7e988915ce1aea190c7f60e009f7e2848d2ba35e2d01917b2cb&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2011%20May%202026%2008%3A04%3A35%20GMT\" -o \"assets/images/sunday-dread-hero.png\")",
+      "Bash(git status *)"
     ]
   }
 }
